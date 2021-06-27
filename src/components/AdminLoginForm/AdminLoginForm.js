@@ -17,7 +17,7 @@ export default function AdminLoginForm() {
   const history = useHistory();
 
   const onClick =()=>{
-    let path =`/dashboard`
+    let path =`/home/`
     history.push(path);
   }
   return (
