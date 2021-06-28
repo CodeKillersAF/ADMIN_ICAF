@@ -29,12 +29,6 @@ export default function ListItem() {
         </ListItemIcon>
         <ListItemText primary="Keynotes" />
       </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <DraftsIcon />
-        </ListItemIcon>
-        <ListItemText primary="Editor" />
-      </ListItem>
       <ListItem button onClick={handleClick}>
         <ListItemIcon>
           <PermIdentity/>
