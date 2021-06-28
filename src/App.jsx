@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import AdminHome from "./pages/AdminHome/AdminHome";
 import AdminLoginPage from "./pages/AdminLogin/AdminLogin";
+import EditorMain from './pages/Editor/Edior';
 
 
 export default function App() {
@@ -14,7 +15,7 @@ export default function App() {
             <Route exact path="/" component={AdminLoginPage} />
            <Layout>
               <Route path ="/home" component={AdminHome}/>
-
+              <Route path ="/editor" component={EditorMain}/>
            </Layout>
             
           </Switch>
