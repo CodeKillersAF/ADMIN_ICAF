@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     fixedHeight: {
-        height: 240,
+        height: 550,
     },
 }));
 export default function AddConferenceDetail() {
@@ -35,8 +35,8 @@ export default function AddConferenceDetail() {
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={8} lg={9}>
                         <Paper className={fixedHeightPaper}>
-                            <h2>Editor</h2>
-                            <AddConferenceInfo/>
+                            <h2>Add Conference Details</h2>
+                            <AddConferenceInfo />
                         </Paper>
                     </Grid>
                     <Grid item xs={12} md={4} lg={3}>
@@ -45,22 +45,18 @@ export default function AddConferenceDetail() {
 
                             <Link to="/editor">
                                 <Button variant="contained" color="secondary">
-                                   View
+                                    View
                                 </Button>
                             </Link>
                             <Link to="/editor-add">
-                            <Button variant="contained" color="primary">
-                                Update
-                            </Button>
+                                <Button variant="contained" color="primary">
+                                    Update
+                                </Button>
                             </Link>
-                    
+
                         </Paper>
                     </Grid>
-                    <Grid item xs={12}>
-                        <Paper className={fixedHeightPaper}>
-                            <h2>Editor</h2>
-                        </Paper>
-                    </Grid>
+
                 </Grid>
 
             </Container>
