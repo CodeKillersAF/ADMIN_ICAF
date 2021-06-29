@@ -8,6 +8,7 @@ import ListConferenceInfo from '../../components/ConferenceInfo/ListConferenceIn
 import { ButtonGroup } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import AddConferenceInfo from '../../components/ConferenceInfo/AddConferenceInfo';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         height: 240,
     },
 }));
-export default function HomeBody() {
+export default function AddConferenceDetail() {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     return (
@@ -35,16 +36,16 @@ export default function HomeBody() {
                     <Grid item xs={12} md={8} lg={9}>
                         <Paper className={fixedHeightPaper}>
                             <h2>Editor</h2>
-                            <ListConferenceInfo />
+                            <AddConferenceInfo/>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} md={4} lg={3}>
                         <Paper className={fixedHeightPaper}>
                             <h2>Edit</h2>
 
-                            <Link to="/editor-add">
+                            <Link to="/editor">
                                 <Button variant="contained" color="secondary">
-                                   Add
+                                   View
                                 </Button>
                             </Link>
                             <Link to="/editor-add">
