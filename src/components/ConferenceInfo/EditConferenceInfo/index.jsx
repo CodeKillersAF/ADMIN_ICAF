@@ -1,10 +1,8 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../../../axios'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import { ButtonGroup } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -27,7 +25,7 @@ export default class EditConferenceInfo extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:8000/api/conference-detail/${this.props.match.params.id}`)
+        axios.get(`/conference-detail/${this.props.match.params.id}`)
             .then(response => {
 
                 this.setState({ venue: response.data.data.venue });
@@ -59,7 +57,7 @@ export default class EditConferenceInfo extends React.Component {
 
         };
         console.log('Data to send', conferenceinfo)
-        axios.put('http://localhost:8000/api/conference-detail/' + this.props.match.params.id, conferenceinfo)
+        axios.put('/conference-detail/' + this.props.match.params.id, conferenceinfo)
             .then(response => {
                 alert('Conference detail updated successfully')
             })
@@ -176,87 +174,6 @@ export default class EditConferenceInfo extends React.Component {
             </Grid>
 
         </Container>
-                {/* <div className="container">
-                    <form onSubmit={this.onSubmit}>
-
-                        <div className="mb-3">
-                            <label htmlFor="venue" className="form-label">Venue</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="venue"
-                                name="venue"
-                                value={this.state.venue}
-                                onChange={this.onChange}
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label htmlFor="venue_dates" className="form-label">Venue_dates</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="venue_dates"
-                                name="venue_dates"
-                                value={this.state.venue_dates}
-                                onChange={this.onChange}
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label htmlFor="venue_time" className="form-label">Venue_time</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="venue_time"
-                                name="venue_time"
-                                value={this.state.venue_time}
-                                onChange={this.onChange}
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label htmlFor="registrationopen_date" className="form-label">Registrationopen_date</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="registrationopen_date"
-                                name="registrationopen_date"
-                                value={this.state.registrationopen_date}
-                                onChange={this.onChange}
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label htmlFor="lastregistration_date" className="form-label">Lastregistration_date</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="lastregistration_date"
-                                name="lastregistration_date"
-                                value={this.state.lastregistration_date}
-                                onChange={this.onChange}
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label htmlFor="is_approved" className="form-label">Is_approved</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="is_approved"
-                                name="is_approved"
-                                value={this.state.is_approved}
-                                onChange={this.onChange}
-                            />
-                        </div>
-
-                        <br />
-                        <button type="submit" className="btn btn-primary">Submit</button>
-
-                    </form>
-
-                </div> */}
             </>
         )
     }

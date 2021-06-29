@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../../../axios'
 
 const initialState = {
     venue: '',
@@ -32,9 +32,9 @@ export default class AddConferenceInfo extends React.Component {
             lastregistration_date: this.state.lastregistration_date
         };
         console.log('Data to send', conferenceinfo)
-        axios.post('http://localhost:8000/api/conference-detail', conferenceinfo)
+        axios.post('/conference-detail', conferenceinfo)
             .then(response => {
-                alert('Vehicle inserted successfully')
+                alert('Conference details added successfully')
             })
             .catch(error => {
                 console.log(error.message);

@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../../../axios'
 
 export default class ListConferenceInfo extends React.Component {
 
@@ -12,7 +12,7 @@ export default class ListConferenceInfo extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/conference-detail')
+        axios.get('/conference-detail')
         .then(response => {
             this.setState({ approved_details: response.data.data });
         })
