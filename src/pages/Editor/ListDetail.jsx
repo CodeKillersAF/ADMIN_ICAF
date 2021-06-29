@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     fixedHeight: {
-        height: 240,
+        height: 600,
     },
 }));
 export default function ListConferenceDetail() {
@@ -58,11 +58,11 @@ export default function ListConferenceDetail() {
                     
                         </Paper>
                     </Grid>
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <Paper className={fixedHeightPaper}>
                             <h2>Editor</h2>
                         </Paper>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
 
             </Container>
