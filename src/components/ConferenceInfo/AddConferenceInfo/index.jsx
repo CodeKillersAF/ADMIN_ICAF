@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class AddConferenceInfo extends React.Component {
     
-    constructor(){
+    constructor(props){
         super(props);
     }
     
@@ -13,6 +13,7 @@ export default class AddConferenceInfo extends React.Component {
     render() {
         return (
             <>
+            <h1>Hi add</h1>
             </>
         )
     }

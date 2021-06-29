@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListConferenceInfo from '../../components/ConferenceInfo/ListConferenceInfo';
 import { ButtonGroup } from '@material-ui/core';
 import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -39,18 +40,19 @@ export default function HomeBody() {
                     </Grid>
                     <Grid item xs={12} md={4} lg={3}>
                         <Paper className={fixedHeightPaper}>
-                            <h2>Editor</h2>
-                            <ButtonGroup>
-                                <Button variant="contained" color="secondary" onClick={() => { alert('clicked') }}>
-                                    Add
-                                </Button>
-                                <Button variant="contained" color="primary">
-                                    Update
-                                </Button>
+                            <h2>Edit</h2>
+
+                            <Link to="/editor-add">
                                 <Button variant="contained" color="secondary">
-                                    Delete
+                                   Add
                                 </Button>
-                            </ButtonGroup>
+                            </Link>
+                            <Link to="/editor-add">
+                            <Button variant="contained" color="primary">
+                                Update
+                            </Button>
+                            </Link>
+                    
                         </Paper>
                     </Grid>
                     <Grid item xs={12}>

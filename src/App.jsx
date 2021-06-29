@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import AddConferenceInfo from "./components/ConferenceInfo/AddConferenceInfo";
 import Layout from "./components/Layout/Layout";
 import AdminHome from "./pages/AdminHome/AdminHome";
 import AdminLoginPage from "./pages/AdminLogin/AdminLogin";
@@ -16,6 +17,7 @@ export default function App() {
            <Layout>
               <Route path ="/home" component={AdminHome}/>
               <Route path ="/editor" component={EditorMain}/>
+              <Route path ="/editor-add" component={AddConferenceInfo}/>
            </Layout>
             
           </Switch>
