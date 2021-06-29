@@ -5,6 +5,7 @@ import AdminHome from "./pages/AdminHome/AdminHome";
 import AdminLoginPage from "./pages/AdminLogin/AdminLogin";
 import ListConferenceDetail from './pages/Editor/ListDetail';
 import AddConferenceDetail from './pages/Editor/AddDetail'
+import UpdateConferenceDetail from "./pages/Editor/UpdateDetail";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
               <Route path ="/home" component={AdminHome}/>
               <Route path ="/editor" component={ListConferenceDetail}/>
               <Route path ="/editor-add" component={AddConferenceDetail}/>
+              <Route path ="/editor-update" component={UpdateConferenceDetail}/>
            </Layout>
             
           </Switch>
