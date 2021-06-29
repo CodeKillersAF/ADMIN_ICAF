@@ -41,16 +41,10 @@ export default function AddConferenceDetail() {
                     </Grid>
                     <Grid item xs={12} md={4} lg={3}>
                         <Paper className={fixedHeightPaper}>
-                            <h2>Edit</h2>
-
+                            <h4>Go to</h4>
                             <Link to="/editor">
                                 <Button variant="contained" color="secondary">
                                     View
-                                </Button>
-                            </Link>
-                            <Link to="/editor-add">
-                                <Button variant="contained" color="primary">
-                                    Update
                                 </Button>
                             </Link>
 

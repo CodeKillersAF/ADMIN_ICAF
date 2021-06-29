@@ -13,14 +13,19 @@ export default class ListConferenceInfo extends React.Component {
 
     componentDidMount() {
         axios.get('/conference-detail')
-        .then(response => {
-            this.setState({ approved_details: response.data.data });
-        })
+            .then(response => {
+                this.setState({ approved_details: response.data.data });
+            })
     }
 
     navigateUpdatePage(e, id) {
         window.location = `/editor/${id}`
     }
+
+    removeInfo(e, id) {
+        axios.delete(`/conference-detail/${id}`)
+    }
+
 
     render() {
         return (
@@ -35,8 +40,9 @@ export default class ListConferenceInfo extends React.Component {
                                 <h5>Regstration open : {item.registrationopen_date}</h5>
                                 <h5>Regstration close : {item.lastregistration_date}</h5>
                                 <h5>Status : {item.is_approved.toString()}</h5>
-                                <button type="submit" className="btn btn-primary">Approve</button>
+                                {/* <button type="submit" className="btn btn-primary">Approve</button> */}
                             </div>
+                            <button type="submit" className="btn btn-danger" onClick={e => this.removeInfo(e, item._id)}>Remove</button>
                         </div>
                     ))}
                 </div>
