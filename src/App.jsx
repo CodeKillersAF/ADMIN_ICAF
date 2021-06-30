@@ -6,6 +6,7 @@ import AdminLoginPage from "./pages/AdminLogin/AdminLogin";
 import ListConferenceDetail from './pages/Editor/ListDetail';
 import AddConferenceDetail from './pages/Editor/AddDetail'
 import EditConferenceInfo from "./components/ConferenceInfo/EditConferenceInfo";
+import ApproveDetail from "./pages/Editor/ApproveDetail";
 
 export default function App() {
   return (
@@ -14,13 +15,14 @@ export default function App() {
         <section>
           <Switch>
             <Route exact path="/" component={AdminLoginPage} />
-           <Layout>
-              <Route path ="/home" component={AdminHome}/>
-              <Route path ="/editor/:id" component={EditConferenceInfo}/>
-              <Route exact path ="/editor" component={ListConferenceDetail}/>
-              <Route path ="/editor-add" component={AddConferenceDetail}/>      
-           </Layout>
-            
+            <Layout>
+              <Route path="/home" component={AdminHome} />
+              <Route path="/editor/:id" component={EditConferenceInfo} />
+              <Route exact path="/editor" component={ListConferenceDetail} />
+              <Route path="/editor-add" component={AddConferenceDetail} />
+              <Route path="/editor-admin" component={ApproveDetail} />
+            </Layout>
+
           </Switch>
         </section>
       </BrowserRouter>

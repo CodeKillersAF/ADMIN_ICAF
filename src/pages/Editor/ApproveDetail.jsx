@@ -4,10 +4,9 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import { ButtonGroup } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import EditConferenceInfo from '../../components/ConferenceInfo/EditConferenceInfo';
+import AdminUpdate from '../../components/ConferenceInfo/AdminUpdate';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -21,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     fixedHeight: {
-        height: 240,
+        height: 600,
     },
 }));
-export default function UpdateConferenceDetail() {
+export default function ApproveDetail() {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     return (
@@ -34,30 +33,14 @@ export default function UpdateConferenceDetail() {
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={8} lg={9}>
                         <Paper className={fixedHeightPaper}>
-                            <h2>Editor</h2>
-                            <EditConferenceInfo/>
+                            <h2>Approve</h2>
+                            <AdminUpdate />
                         </Paper>
                     </Grid>
                     <Grid item xs={12} md={4} lg={3}>
                         <Paper className={fixedHeightPaper}>
-                            <h2>Edit</h2>
-
-                            <Link to="/editor">
-                                <Button variant="contained" color="secondary">
-                                   View
-                                </Button>
-                            </Link>
-                            <Link to="/editor-add">
-                            <Button variant="contained" color="primary">
-                                Add
-                            </Button>
-                            </Link>
-                    
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Paper className={fixedHeightPaper}>
-                            <h2>Editor</h2>
+                            <h4>Go to</h4>
+                            
                         </Paper>
                     </Grid>
                 </Grid>
