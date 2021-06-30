@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+    "@material-ui/data-grid": "^4.0.0-alpha.32",
     "@material-ui/icons": "^4.11.2",
+    "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "parcel": "^2.0.0-beta.3.1",
     "react": "^17.0.2",

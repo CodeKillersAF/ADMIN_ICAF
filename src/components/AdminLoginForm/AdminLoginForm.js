@@ -2,7 +2,6 @@ import {
   Checkbox,
   FormControlLabel,
   Grid,
-  makeStyles,
   Paper,
   TextField,
   Button,
@@ -11,14 +10,33 @@ import React from "react";
 import "./AdminLoginForm.css";
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
+import axios from "../../axios";
 
 export default function AdminLoginForm() {
+  const [username, setusername] = useState('');
+  const [password, setpassword] = useState('');
 
   const history = useHistory();
 
-  const onClick =()=>{
-    let path =`/home/`
-    history.push(path);
+  const onFormClick =async()=>{
+   
+
+    let user={
+      username : username,
+      password : password
+    }
+
+    await axios.post('/users/login-admin',user)
+    .then((response)=>{
+      console.log(response.data); 
+      let path =`/home/`
+      history.push(path);
+    })
+    .catch((err)=>{
+      console.log(err.response.data);
+      alert(err.response.data.message);
+    })
   }
   return (
     <div className="adminLoginForm">
@@ -26,18 +44,24 @@ export default function AdminLoginForm() {
         <Paper elevation={10} className="adminLoginForm__paper">
           <h1 className="header">ICAF</h1>
           <Divider />
-          <Grid className="textfield">
+          <Grid className="AdminTextfield">
             <TextField
               size="medium"
               id="outlined-basic"
               label="Username"
               variant="outlined"
+              name="username"
+              value={username}
+              onChange={(e)=>setusername(e.target.value)}
             />
             <TextField
               size="medium"
               id="outlined-basic"
               label="Password"
               variant="outlined"
+              name="password"
+              value={password}
+              onChange={(e)=>setpassword(e.target.value)}
             />
           </Grid>
           <FormControlLabel
@@ -45,7 +69,7 @@ export default function AdminLoginForm() {
             control={<Checkbox name="checkedB" color="primary" />}
             label="Remember me"
           />
-          <Button variant="contained" color="secondary" className="button" onClick={onClick}>
+          <Button variant="contained" color="secondary" className="adminLoginButton" onClick={onFormClick}>
             Login
           </Button>
         </Paper>
