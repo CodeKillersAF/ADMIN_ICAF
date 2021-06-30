@@ -18,17 +18,14 @@ export default class AdminUpdate extends React.Component {
             })
     }
 
-    // navigateUpdatePage(e, id) {
-    //     window.location = `/editor/${id}`
-    // }
-
     approve(e, id) {
         let status = {
             is_approved: true
         }
         axios.put(`/conference-detail/update-status/${id}`, status)
             .then(response => {
-                alert('Conference detail updated successfully')
+                alert('Conference status approved!')
+                window.location.reload();
             })
             .catch(error => {
                 console.log(error.message);
@@ -36,6 +33,20 @@ export default class AdminUpdate extends React.Component {
             })
     }
 
+    reject(e, id) {
+        let status = {
+            is_approved: false
+        }
+        axios.put(`/conference-detail/update-status/${id}`, status)
+            .then(response => {
+                alert('Conference status rejected!')
+                window.location.reload();
+            })
+            .catch(error => {
+                console.log(error.message);
+                alert(error.message)
+            })
+    }
 
     render() {
         return (
@@ -50,9 +61,9 @@ export default class AdminUpdate extends React.Component {
                                 <h5>Regstration open : {item.registrationopen_date}</h5>
                                 <h5>Regstration close : {item.lastregistration_date}</h5>
                                 <h5>Status : {item.is_approved.toString()}</h5>
-                                {/* <button type="submit" className="btn btn-primary">Approve</button> */}
+                                <button type="submit" className="btn btn-primary" onClick={e => this.approve(e, item._id)}>Approve</button>{" "}
+                                <button type="submit" className="btn btn-danger" onClick={e => this.reject(e, item._id)}>Reject</button>
                             </div>
-                            <button type="submit" className="btn btn-danger" onClick={e => this.approve(e, item._id)}>Approve</button>
                         </div>
                     ))}
                 </div>
