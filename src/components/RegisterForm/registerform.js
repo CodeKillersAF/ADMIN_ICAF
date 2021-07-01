@@ -5,7 +5,7 @@ import axios from "axios";
 function registerform() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('editor');
+  const [role, setRole] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -52,8 +52,9 @@ function registerform() {
           />
           <br />
 
-          <label>Your Email</label>
+          <label>Select Role</label>
           <select 
+            required
             value={role}
             onChange={(e) => setRole(e.target.value)}
           >
