@@ -11,7 +11,7 @@ import "./AdminLoginForm.css";
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import axios from "../../axios";
+import axios from "axios";
 
 export default function AdminLoginForm() {
   const [username, setusername] = useState('');
@@ -27,11 +27,14 @@ export default function AdminLoginForm() {
       password : password
     }
 
-    await axios.post('/users/login-admin',user)
+    await axios.post('/users/login-user',user)
     .then((response)=>{
       console.log(response.data); 
       let path =`/home/`
       history.push(path);
+
+     localStorage.setItem('token', response.data.token)
+      console.log(response.data.token);
     })
     .catch((err)=>{
       console.log(err.response.data);
