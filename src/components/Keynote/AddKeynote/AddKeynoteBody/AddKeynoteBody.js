@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-
+import KeynoteForm  from  '../AddKeynoteForm/AddKeynoteForm';
 const useStyles = makeStyles((theme) => ({
     container: {
       paddingTop: theme.spacing(4),
@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
     },
     fixedHeight: {
-      height: 240,
+      height: 600,
     },
   }));
-export default function HomeBody() {
+export default function AddKeynoteBody() {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     return (
@@ -31,21 +31,10 @@ export default function HomeBody() {
             {/* Chart */}
             <Grid item xs={12} md={8} lg={12}>
               <Paper className={fixedHeightPaper}>
-                
+                  <KeynoteForm/>
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={fixedHeightPaper}>
-                
-              </Paper>
-            </Grid>
+          
           </Grid>
          
         </Container>
