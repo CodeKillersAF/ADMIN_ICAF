@@ -1,8 +1,8 @@
 
-.keynoteForm__paper{
+.addKeynoteForm__paper{
   margin: auto;
   width: 600px !important;
-    height: 430px !important;
+    height: 480px !important;
     align-items: center !important;
   
 }
@@ -33,4 +33,11 @@
   margin-left: 26px;
   width: 400px !important;
   height: 50px;
+}
+.textarea{
+  width: 550px !important;
+  margin-top: 20px;
+  margin-left: 26px;
+  height: 100px !important;
+  
 }

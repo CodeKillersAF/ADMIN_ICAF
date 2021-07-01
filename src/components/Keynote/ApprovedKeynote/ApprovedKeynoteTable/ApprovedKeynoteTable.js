@@ -5,8 +5,11 @@ import EditIcon from "@material-ui/icons/Edit";
 import "./ApprovedKeynoteTable.css"
 import { useState } from "react";
 import axios from "../../../../axios";
+import { useHistory } from "react-router-dom";
 
 export default function ApprovedKeynoteTable() {
+
+  const history = useHistory();
 
   const [keynotes, setkeynotes] = useState([]);
 
@@ -22,6 +25,10 @@ export default function ApprovedKeynoteTable() {
     }
     fetchData();
   })
+  async function onClickNavigate(e,keynoteID){
+    const path =`/update-keynote/`+keynoteID;
+    history.push(path);
+  }
 
 
   return (
@@ -32,7 +39,7 @@ export default function ApprovedKeynoteTable() {
             <tr>
               <th>Speaker name</th>
               <th>Position</th>
-              <th>Description</th>
+              
               <th>Edit</th>
               <th>Delete</th>
               
@@ -43,7 +50,7 @@ export default function ApprovedKeynoteTable() {
             <tbody>
               <td>{keynote.speakerName}</td>
                 <td>{keynote.position}</td>
-                <td>{keynote.description}</td>
+                
                 <td>
                   <IconButton>
                     {" "}
@@ -51,7 +58,7 @@ export default function ApprovedKeynoteTable() {
                   </IconButton>
                   </td>
                   <td>
-                  <IconButton>
+                  <IconButton onClick ={e=>onClickNavigate(e,keynote._id)}>
                     {" "}
                     <EditIcon color="primary" />{" "}
                   </IconButton>
