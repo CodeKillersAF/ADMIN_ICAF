@@ -9,7 +9,7 @@
     height: 50px;
     
 }
-.textfield .MuiTextField-root {
+.AdminTextfield .MuiTextField-root {
     
     
     margin-top: 20px;
@@ -22,7 +22,7 @@
     margin-top: 15px;
     margin-left: 13px !important;
 }
-.button{
+.adminLoginButton{
     margin-top: 15px !important;
     width: 250px;
     margin-left: 25px !important;
