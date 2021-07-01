@@ -3,8 +3,10 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import { useHistory } from 'react-router';
 
 export default function Account() {
+    const history = useHistory();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
   
@@ -14,6 +16,10 @@ export default function Account() {
     };
   
     const handleClose = () => {
+      localStorage.clear();
+      let path = '/';
+      history.push(path);
+      window.location.reload();
       setAnchorEl(null);
     };
     return (
