@@ -71,6 +71,8 @@ export default function AdminViewUser() {
   };
 
 
+
+  useEffect(() => {
   //delete data
   const handleDelete = (id, role) => {
     //console.log(id);
@@ -95,6 +97,7 @@ export default function AdminViewUser() {
        alert(error.message);
      })
   };
+}, []);
 
   //update role path set
 const UpdateRole = (id) => {
