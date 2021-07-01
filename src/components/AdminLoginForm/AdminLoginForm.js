@@ -7,19 +7,41 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
-import React from "react";
+import React , { useState } from "react";
 import "./AdminLoginForm.css";
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
+import axios from 'axios';
 
 export default function AdminLoginForm() {
 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+
+
   const history = useHistory();
 
-  const onClick =()=>{
-    let path =`/home/`
-    history.push(path);
+  const formOnSubmit = (e) => {
+    e.preventDefault();
+    let user = {
+      username: username,
+      password: password
+    }
+    axios.post('http://localhost:8000/api/users/login-admin', user)
+    .then((response) => {
+      console.log(response.data);
+
+      const path = `/home`;
+      history.push(path);
+      
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }
+
+
   return (
     <div className="adminLoginForm">
       <Grid>
@@ -32,12 +54,18 @@ export default function AdminLoginForm() {
               id="outlined-basic"
               label="Username"
               variant="outlined"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <TextField
               size="medium"
               id="outlined-basic"
               label="Password"
               variant="outlined"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Grid>
           <FormControlLabel
@@ -45,7 +73,7 @@ export default function AdminLoginForm() {
             control={<Checkbox name="checkedB" color="primary" />}
             label="Remember me"
           />
-          <Button variant="contained" color="secondary" className="button" onClick={onClick}>
+          <Button variant="contained" color="secondary" className="button" onClick={formOnSubmit}>
             Login
           </Button>
         </Paper>
