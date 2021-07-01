@@ -6,12 +6,11 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
-import React from "react";
+import React , { useState } from "react";
 import "./AdminLoginForm.css";
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios";
+import axios from 'axios';
 
 export default function AdminLoginForm() {
   const [username, setusername] = useState('');
@@ -19,8 +18,8 @@ export default function AdminLoginForm() {
 
   const history = useHistory();
 
+
   const onFormClick =async()=>{
-   
 
     let user={
       username : username,
@@ -41,6 +40,8 @@ export default function AdminLoginForm() {
       alert(err.response.data.message);
     })
   }
+
+
   return (
     <div className="adminLoginForm">
       <Grid>
@@ -72,6 +73,7 @@ export default function AdminLoginForm() {
             control={<Checkbox name="checkedB" color="primary" />}
             label="Remember me"
           />
+
           <Button variant="contained" color="secondary" className="adminLoginButton" onClick={onFormClick}>
             Login
           </Button>
