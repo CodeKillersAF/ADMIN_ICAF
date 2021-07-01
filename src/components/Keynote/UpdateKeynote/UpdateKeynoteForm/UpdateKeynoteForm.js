@@ -99,6 +99,7 @@ export default function UpdateKeynoteForm() {
             name="speakerName"
             value={speakerName}
             onChange={(e) => setspeakerName(e.target.value)}
+            required
           />
           <TextField
             size="medium"
@@ -107,6 +108,7 @@ export default function UpdateKeynoteForm() {
             name="position"
             value={position}
             onChange={(e) => setposition(e.target.value)}
+            required
           />
           <TextareaAutosize
             rowsMax={4}
@@ -116,6 +118,7 @@ export default function UpdateKeynoteForm() {
             name="description"
             value={description}
             onChange={(e) => setdescription(e.target.value)}
+            required
           />
         </Grid>
         <input type="file" className="uploadButton" onChange={onImageSelect} />

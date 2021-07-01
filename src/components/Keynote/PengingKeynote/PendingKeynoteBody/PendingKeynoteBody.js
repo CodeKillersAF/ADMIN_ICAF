@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
     },
     fixedHeight: {
-      height: 500,
+      height: 600,
     },
   }));
 export default function PendingKeynoteBody() {
