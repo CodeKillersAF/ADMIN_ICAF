@@ -4,6 +4,10 @@ import Layout from "./components/Layout/Layout";
 import AddKeynote from "./pages/AddKeynote/AddKeynote";
 import AdminHome from "./pages/AdminHome/AdminHome";
 import AdminLoginPage from "./pages/AdminLogin/AdminLogin";
+import ListConferenceDetail from './pages/Editor/ListDetail';
+import AddConferenceDetail from './pages/Editor/AddDetail'
+import EditConferenceInfo from "./components/ConferenceInfo/EditConferenceInfo";
+import ApproveDetail from "./pages/Editor/ApproveDetail";
 import Registeruser from './pages/RegisterUser/registeruser';
 import AdminView from './pages/AdminView/adminview';
 import RoleChange from './components/AdminViewUser/AdminEditRole/admineditrole';
@@ -12,6 +16,7 @@ import ApprovedKeynote from "./pages/ApprovedKeynote/Approvedkeynote";
 import PendingKeynote from "./pages/PendingKeynote/PendingKeynote";
 import UpdateKeynote from "./pages/UpdateKeynote/UpdateKeynote";
 import Attendees from "./pages/Attendees/functionsOfAttendees";
+
 
 export default function App() {
   return (
@@ -31,8 +36,11 @@ export default function App() {
               <Route path ="/pending-keynote" component={PendingKeynote}/>
               <Route path ="/update-keynote/:id" component={UpdateKeynote}/>
               <Route path ="/attendees" component={Attendees} />
+              <Route path="/editor/:id" component={EditConferenceInfo} />
+              <Route exact path="/editor" component={ListConferenceDetail} />
+              <Route path="/editor-add" component={AddConferenceDetail} />
+              <Route path="/editor-admin" component={ApproveDetail} />
            </Layout>
-
           </Switch>
         </section>
       </BrowserRouter>
