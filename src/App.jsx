@@ -6,6 +6,7 @@ import AdminHome from "./pages/AdminHome/AdminHome";
 import AdminLoginPage from "./pages/AdminLogin/AdminLogin";
 import ApprovedKeynote from "./pages/ApprovedKeynote/Approvedkeynote";
 import PendingKeynote from "./pages/PendingKeynote/PendingKeynote";
+import UpdateKeynote from "./pages/UpdateKeynote/UpdateKeynote";
 
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
               <Route path ="/approved-keynote" component={ApprovedKeynote}/>
               <Route path ="/add-keynote" component={AddKeynote}/>
               <Route path ="/pending-keynote" component={PendingKeynote}/>
+              <Route path ="/update-keynote/:id" component={UpdateKeynote}/>
            </Layout>
             
           </Switch>

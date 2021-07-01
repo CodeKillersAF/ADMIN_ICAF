@@ -6,8 +6,10 @@ import "./PendingKeynoteTable.css"
 import { useState } from "react";
 import axios from "../../../../axios";
 import Button from '@material-ui/core/Button';
+import { useHistory } from "react-router-dom";
 
 export default function PendingKeynoteTable() {
+  const history = useHistory();
 
   const [keynotes, setkeynotes] = useState([]);
 
@@ -28,7 +30,8 @@ export default function PendingKeynoteTable() {
   }
 
   async function onClickNavigate(e,keynoteID){
-    
+    const path =`/update-keynote/`+keynoteID;
+    history.push(path);
   }
 
   useEffect(() => {
@@ -47,7 +50,7 @@ export default function PendingKeynoteTable() {
             <tr>
               <th>Speaker name</th>
               <th>Position</th>
-              <th>Description</th>
+             
               <th>Approve</th>
               <th>Delete</th>
               <th>Edit</th>
@@ -59,7 +62,7 @@ export default function PendingKeynoteTable() {
             <tbody>
               <td>{keynote.speakerName}</td>
                 <td>{keynote.position}</td>
-                <td>{keynote.description}</td>
+                
                 <td>
                 <Button variant="contained" color="primary"onClick={e=>onClickApprove(e,keynote._id)}>
         Approve
