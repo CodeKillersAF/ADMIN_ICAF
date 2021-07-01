@@ -2,7 +2,6 @@ import {
   Checkbox,
   FormControlLabel,
   Grid,
-  makeStyles,
   Paper,
   TextField,
   Button,
@@ -14,30 +13,31 @@ import { useHistory } from "react-router-dom";
 import axios from 'axios';
 
 export default function AdminLoginForm() {
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-
+  const [username, setusername] = useState('');
+  const [password, setpassword] = useState('');
 
   const history = useHistory();
 
-  const formOnSubmit = (e) => {
-    e.preventDefault();
-    let user = {
-      username: username,
-      password: password
-    }
-    axios.post('http://localhost:8000/api/users/login-admin', user)
-    .then((response) => {
-      console.log(response.data);
 
-      const path = `/home`;
+  const onFormClick =async()=>{
+
+    let user={
+      username : username,
+      password : password
+    }
+
+    await axios.post('/users/login-user',user)
+    .then((response)=>{
+      console.log(response.data); 
+      let path =`/home/`
       history.push(path);
-      
+
+     localStorage.setItem('token', response.data.token)
+      console.log(response.data.token);
     })
-    .catch(error => {
-      console.log(error);
+    .catch((err)=>{
+      console.log(err.response.data);
+      alert(err.response.data.message);
     })
   }
 
@@ -48,7 +48,7 @@ export default function AdminLoginForm() {
         <Paper elevation={10} className="adminLoginForm__paper">
           <h1 className="header">ICAF</h1>
           <Divider />
-          <Grid className="textfield">
+          <Grid className="AdminTextfield">
             <TextField
               size="medium"
               id="outlined-basic"
@@ -56,7 +56,7 @@ export default function AdminLoginForm() {
               variant="outlined"
               name="username"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e)=>setusername(e.target.value)}
             />
             <TextField
               size="medium"
@@ -65,7 +65,7 @@ export default function AdminLoginForm() {
               variant="outlined"
               name="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e)=>setpassword(e.target.value)}
             />
           </Grid>
           <FormControlLabel
@@ -73,7 +73,8 @@ export default function AdminLoginForm() {
             control={<Checkbox name="checkedB" color="primary" />}
             label="Remember me"
           />
-          <Button variant="contained" color="secondary" className="button" onClick={formOnSubmit}>
+
+          <Button variant="contained" color="secondary" className="adminLoginButton" onClick={onFormClick}>
             Login
           </Button>
         </Paper>
