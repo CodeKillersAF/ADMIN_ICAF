@@ -7,6 +7,8 @@ import './admintable.css';
 import { green } from '@material-ui/core/colors';
 import {useHistory } from 'react-router-dom';
 import BuildIcon from '@material-ui/icons/Build';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 export default function AdminViewUser() {
   const [state, setState] = useState([]);
@@ -18,7 +20,7 @@ export default function AdminViewUser() {
 
   const getAllData = async () => {
     try{
-      const data = await axios.get('http://localhost:8080/api/users/getAll')
+      const data = await axios.get('/getAll')
       console.log(data);
       setState(data.data.data);
     }
@@ -32,7 +34,7 @@ export default function AdminViewUser() {
   const getDataAdmin = async () => {
     try {
       const data = await axios.get(
-        "http://localhost:8080/api/users/getRole/admin"
+        "/getRole/admin"
       );
       //console.log(data.data.data);
       setState(data.data.data);
@@ -46,7 +48,7 @@ export default function AdminViewUser() {
   const getDataEditor = async () => {
     try {
       const data = await axios.get(
-        "http://localhost:8080/api/users/getRole/editor"
+        "/getRole/editor"
       );
       console.log(data.data.data);
       setState(data.data.data);
@@ -60,7 +62,7 @@ export default function AdminViewUser() {
   const getDataReviewer = async () => {
     try {
       const data = await axios.get(
-        "http://localhost:8080/api/users/getRole/reviewer"
+        "/getRole/reviewer"
       );
       //console.log(data.data.data);
       setState(data.data.data);
@@ -78,7 +80,7 @@ export default function AdminViewUser() {
     //console.log(id);
     //console.log(role);
 
-    axios.delete(`http://localhost:8080/api/users/delete/${id}`)
+    axios.delete(`/delete/${id}`)
      .then((response) => {
        //console.log(response.data);
        alert(response.data.data);
@@ -121,7 +123,7 @@ useEffect(() => {
     <br /><br />
     <center>
 
-      <div class="btn-group" role="group" aria-label="Basic outlined example">
+      {/* <div class="btn-group" role="group" aria-label="Basic outlined example">
         <button type="button" class="btn btn-outline-primary" onClick={getAllData}>
           All Users
         </button>
@@ -134,7 +136,14 @@ useEffect(() => {
         <button type="button" class="btn btn-outline-primary" onClick={getDataReviewer}>
           Reviewer
         </button>
-      </div>
+      </div> */}
+
+      <ButtonGroup size="large" variant="contained" color="primary" aria-label="contained primary button group">
+        <Button onClick={getAllData}>All Users</Button>
+        <Button onClick={getDataAdmin}>Admin</Button>
+        <Button onClick={getDataEditor}>Editor</Button>
+        <Button onClick={getDataReviewer}>Reviewer</Button>
+      </ButtonGroup>
 
       <form class="container d-flex">
         <input className="form-control"
