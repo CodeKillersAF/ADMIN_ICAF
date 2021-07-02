@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import "./ApprovedKeynoteTable.css";
 import { useState } from "react";
 import axios from "../../../../axios";
 import { useHistory } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 export default function ApprovedKeynoteTable() {
   const history = useHistory();
@@ -21,7 +21,12 @@ export default function ApprovedKeynoteTable() {
       setkeynotes(req.data.data);
     }
     fetchData();
-  });
+  },[onClickDelete]);
+
+  async function onClickDelete(e, keynoteID) {
+    await axios.delete("/keynotes/delete-keynote/" + keynoteID);
+  }
+
   async function onClickNavigate(e, keynoteID) {
     const path = `/update-keynote/` + keynoteID;
     history.push(path);
@@ -30,16 +35,10 @@ export default function ApprovedKeynoteTable() {
   return (
     <div>
       <center>
-        <h1 style={{color:"#3571f1"}}>Approved Keynotes</h1>
+        <h1 className="approvedKeynoteHeader">Approved Keynotes</h1>
         <form class="container d-flex">
           <input
-            className="form-control"
-            style={{
-              marginTop: 30,
-              marginBottom: 20,
-              width: "40%",
-              marginLeft: 350,
-            }}
+            className="approvedSearch"
             type="search"
             placeholder="Search with speaker name"
             aria-label="Search"
@@ -73,16 +72,24 @@ export default function ApprovedKeynoteTable() {
               <td>{keynote.position}</td>
 
               <td>
-                <IconButton>
-                  {" "}
-                  <DeleteIcon color="secondary" />{" "}
-                </IconButton>
+              <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={(e) => onClickDelete(e, keynote._id)}
+                  endIcon={<DeleteIcon/>}
+                >
+                  Delete
+                </Button>
               </td>
               <td>
-                <IconButton onClick={(e) => onClickNavigate(e, keynote._id)}>
-                  {" "}
-                  <EditIcon color="primary" />{" "}
-                </IconButton>
+              <Button
+                  variant="contained"
+                  color="default"
+                  onClick={(e) => onClickNavigate(e, keynote._id)}
+                  endIcon={<EditIcon/>}
+                >
+                  Edit
+                </Button>
               </td>
             </tbody>
           ))}
