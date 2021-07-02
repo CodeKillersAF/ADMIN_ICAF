@@ -34,7 +34,7 @@ export default function ListConferenceDetail() {
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={8} lg={9}>
                         <Paper className={fixedHeightPaper}>
-                            <h2>Editor</h2>
+                            <h2>Conference Details</h2>
                             <ListConferenceInfo />
                         </Paper>
                     </Grid>
@@ -48,11 +48,6 @@ export default function ListConferenceDetail() {
                             </Link>
                         </Paper>
                     </Grid>
-                    {/* <Grid item xs={12}>
-                        <Paper className={fixedHeightPaper}>
-                            <h2>Editor</h2>
-                        </Paper>
-                    </Grid> */}
                 </Grid>
 
             </Container>
