@@ -88,7 +88,7 @@ export default function KeynoteForm() {
             label="Speaker name"
             variant="outlined"
             name="speakerName"
-            valu={speakerName}
+            value={speakerName}
             onChange={(e) => setspeakerName(e.target.value)}
           />
           <TextField

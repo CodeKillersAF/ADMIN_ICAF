@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from '../../../axios'
+import axios from 'axios';
 
 export default class ListConferenceInfo extends React.Component {
 
@@ -12,7 +12,7 @@ export default class ListConferenceInfo extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('/conference-detail')
+        axios.get('/')
             .then(response => {
                 this.setState({ approved_details: response.data.data });
             })
@@ -23,7 +23,7 @@ export default class ListConferenceInfo extends React.Component {
     }
 
     removeInfo(e, id) {
-        axios.delete(`/conference-detail/${id}`)
+        axios.delete(`/${id}`)
     }
 
 

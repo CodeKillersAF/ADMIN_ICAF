@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from '../../../axios'
+import axios from 'axios';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -25,7 +25,7 @@ export default class EditConferenceInfo extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`/conference-detail/${this.props.match.params.id}`)
+        axios.get(`/${this.props.match.params.id}`)
             .then(response => {
 
                 this.setState({ venue: response.data.data.venue });
@@ -57,7 +57,7 @@ export default class EditConferenceInfo extends React.Component {
 
         };
         console.log('Data to send', conferenceinfo)
-        axios.put('/conference-detail/' + this.props.match.params.id, conferenceinfo)
+        axios.put('/' + this.props.match.params.id, conferenceinfo)
             .then(response => {
                 alert('Conference detail updated successfully')
             })
