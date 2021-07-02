@@ -1,0 +1,29 @@
+.styled-table {
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 90%;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #DF175E;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 4px solid #dddddd;
+    font-weight: bold;
+}
+
+

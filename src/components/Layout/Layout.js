@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
@@ -14,6 +14,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ListItemSub from "../ItemLists/ListItemSub";
 import { MainListItems } from "../ItemLists/MainListItems";
 import Account from "../Account/Account";
+import axios from "axios";
 
 
 const drawerWidth = 240;
@@ -85,6 +86,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Layout({ children }) {
+
+  useEffect(() => {
+
+    axios.get('/home')
+    .then(res => {
+      console.log(res);
+    }),
+    err => {
+      console.log(err);
+    }
+  });
  
 
 
@@ -116,6 +128,7 @@ export default function Layout({ children }) {
               open && classes.menuButtonHidden
             )}
           >
+
             <MenuIcon />
           </IconButton>
           <Typography
@@ -153,6 +166,7 @@ export default function Layout({ children }) {
         <div className={classes.appBarSpacer} />
         {children}
       </main>
+
     </div>
   );
 }
