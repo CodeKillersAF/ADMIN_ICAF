@@ -1,8 +1,21 @@
 import axios from 'axios';
 import React, { useState} from 'react';
 import { storage } from '../../../firebase';
+import { makeStyles } from '@material-ui/core/styles';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const useStyles = makeStyles((theme) => ({
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: '#fff',
+    },
+  }))
 
 function addTemplate() {
+
+    const [open, setOpen] = React.useState(false);
+    const classes = useStyles();
 
     const [topic, setTopic] = useState('');
     const [description, setDescription] = useState('');
@@ -39,6 +52,7 @@ function addTemplate() {
 
     async function uploadfile(e) {
         e.preventDefault();
+        setOpen(!open);
         let bucketName = "templateFiles";
         let uploadTask = storage.ref(`${bucketName}/${file.name}`).put(file);
         await uploadTask.on(
@@ -56,6 +70,7 @@ function addTemplate() {
                     setUrl(firebaseURl);
                     console.log(firebaseURl);
                     setfileUploaded(true);
+                    setOpen(false);
                  });
             }
         )
@@ -63,6 +78,12 @@ function addTemplate() {
 
     return (
         <div>
+
+    <Backdrop className={classes.backdrop} open={open}>
+        <CircularProgress color="inherit" />
+        {" "}Uploading....
+      </Backdrop>
+
         <div className="create">
         <h1>Add Template</h1>
         <form>

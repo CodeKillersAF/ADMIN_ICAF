@@ -15,6 +15,7 @@ import ListItemSub from "../ItemLists/ListItemSub";
 import { MainListItems } from "../ItemLists/MainListItems";
 import Account from "../Account/Account";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 
 const drawerWidth = 240;
@@ -87,18 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Layout({ children }) {
 
-  useEffect(() => {
-
-    axios.get('/home')
-    .then(res => {
-      console.log(res);
-    }),
-    err => {
-      console.log(err);
-    }
-  });
- 
-
+  const history = useHistory();
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -108,7 +98,6 @@ export default function Layout({ children }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
 
   return (
     <div className={classes.root}>
