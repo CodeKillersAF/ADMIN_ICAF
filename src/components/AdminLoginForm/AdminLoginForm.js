@@ -26,7 +26,7 @@ export default function AdminLoginForm() {
       password : password
     }
 
-    await axios.post('/users/login-user',user)
+    await axios.post('/login-user',user)
     .then((response)=>{
       console.log(response.data); 
       let path =`/home/`
