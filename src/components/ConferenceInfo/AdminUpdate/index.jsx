@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from '../../../axios'
+import './styles.css';
 
 export default class AdminUpdate extends React.Component {
 
@@ -50,19 +51,21 @@ export default class AdminUpdate extends React.Component {
 
     render() {
         return (
-            <div>
-                <div>
+            <div className="container">
+                <div className="container">
                     {this.state.approved_details.length > 0 && this.state.approved_details.map((item, index) => (
-                        <div key={index} className="card mb-3">
-                            <div className="p-3" >
-                                <h5>Venue : {item.venue}</h5>
-                                <h5>Dates : {item.venue_dates}</h5>
-                                <h5>Time : {item.venue_time}</h5>
-                                <h5>Regstration open : {item.registrationopen_date}</h5>
-                                <h5>Regstration close : {item.lastregistration_date}</h5>
-                                <h5>Status : {item.is_approved.toString()}</h5>
-                                <button type="submit" className="btn btn-primary" onClick={e => this.approve(e, item._id)}>Approve</button>{" "}
-                                <button type="submit" className="btn btn-danger" onClick={e => this.reject(e, item._id)}>Reject</button>
+                        <div key={index} className="textStyle">
+                            <div >
+                                <p>Venue : {item.venue}</p>
+                                <p>Dates : {item.venue_dates}</p>
+                                <p>Time : {item.venue_time}</p>
+                                <p>Regstration open : {item.registrationopen_date}</p>
+                                <p>Regstration close : {item.lastregistration_date}</p>
+                                <p>Status : {item.is_approved.toString()}</p>
+                                <div>
+                                    <button type="submit" className="button1" onClick={e => this.approve(e, item._id)}>Approve</button>{" "}
+                                    <button type="submit" className="button2" onClick={e => this.reject(e, item._id)}>Reject</button>
+                                </div>
                             </div>
                         </div>
                     ))}
