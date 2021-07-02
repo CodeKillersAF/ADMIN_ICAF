@@ -16,6 +16,9 @@ import ApprovedKeynote from "./pages/ApprovedKeynote/Approvedkeynote";
 import PendingKeynote from "./pages/PendingKeynote/PendingKeynote";
 import UpdateKeynote from "./pages/UpdateKeynote/UpdateKeynote";
 import Attendees from "./pages/Attendees/functionsOfAttendees";
+import AddTemplatepage from './pages/TemplatePage/AddTemplatePage/addTemplatepage';
+import ViewTemplatePage from './pages/TemplatePage/ViewTemplatePage/viewTemplatepage';
+import UpdateTemplatePage from './pages/TemplatePage/EditTemplatePage/editTemplatepage';
 
 
 export default function App() {
@@ -40,6 +43,9 @@ export default function App() {
               <Route exact path="/editor" component={ListConferenceDetail} />
               <Route path="/editor-add" component={AddConferenceDetail} />
               <Route path="/editor-admin" component={ApproveDetail} />
+              <Route path="/add-template" component={AddTemplatepage} />
+              <Route path="/view-template" component={ViewTemplatePage} />
+              <Route path="/update-template/:id" component={UpdateTemplatePage} />
            </Layout>
           </Switch>
         </section>

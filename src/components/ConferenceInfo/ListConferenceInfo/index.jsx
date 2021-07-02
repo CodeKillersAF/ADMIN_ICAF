@@ -1,6 +1,7 @@
 import React from 'react';
-import axios from '../../../axios'
+import axios from 'axios';
 import './styles.css';
+
 
 export default class ListConferenceInfo extends React.Component {
 
@@ -13,7 +14,7 @@ export default class ListConferenceInfo extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('/conference-detail')
+        axios.get('/conference/')
             .then(response => {
                 this.setState({ approved_details: response.data.data });
             })
@@ -23,8 +24,8 @@ export default class ListConferenceInfo extends React.Component {
         window.location = `/editor/${id}`
     }
 
-    removeInfo(e, id) {
-        axios.delete(`/conference-detail/${id}`)
+    removeInfo(e, id) {     
+        axios.delete(`/conference/${id}`)
             .then(response => {
                 // alert('Deletion successful!')
                 window.location.reload();
