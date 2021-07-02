@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import './styles.css';
 
 const initialState = {
     venue: '',
@@ -12,7 +13,7 @@ const initialState = {
     venue_time: '',
     registrationopen_date: '',
     lastregistration_date: '',
-    is_approved:''
+    is_approved: ''
 }
 
 export default class EditConferenceInfo extends React.Component {
@@ -72,108 +73,109 @@ export default class EditConferenceInfo extends React.Component {
     render() {
         return (
             <>
-            <Container maxWidth="lg">
-            <Grid container spacing={3}>
-                <Grid item xs={12} md={8} lg={9}>
-                    <Paper>
-                        <h2>Update Conference Details</h2>
-                        <div className="container">
-                    <form onSubmit={this.onSubmit}>
+                <Container maxWidth="lg">
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} md={8} lg={9}>
+                            <Paper>
+                                <div className="container">
+                                <h2>Update Conference Details</h2>
+                                <div className="container">
+                                    <form onSubmit={this.onSubmit}>
 
-                        <div className="mb-3">
-                            <label htmlFor="venue" className="form-label">Venue</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="venue"
-                                name="venue"
-                                value={this.state.venue}
-                                onChange={this.onChange}
-                            />
-                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="venue" className="form-label">Venue</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="venue"
+                                                name="venue"
+                                                value={this.state.venue}
+                                                onChange={this.onChange}
+                                            />
+                                        </div>
 
-                        <div className="mb-3">
-                            <label htmlFor="venue_dates" className="form-label">Venue_dates</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="venue_dates"
-                                name="venue_dates"
-                                value={this.state.venue_dates}
-                                onChange={this.onChange}
-                            />
-                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="venue_dates" className="form-label">Venue_dates</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="venue_dates"
+                                                name="venue_dates"
+                                                value={this.state.venue_dates}
+                                                onChange={this.onChange}
+                                            />
+                                        </div>
 
-                        <div className="mb-3">
-                            <label htmlFor="venue_time" className="form-label">Venue_time</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="venue_time"
-                                name="venue_time"
-                                value={this.state.venue_time}
-                                onChange={this.onChange}
-                            />
-                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="venue_time" className="form-label">Venue_time</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="venue_time"
+                                                name="venue_time"
+                                                value={this.state.venue_time}
+                                                onChange={this.onChange}
+                                            />
+                                        </div>
 
-                        <div className="mb-3">
-                            <label htmlFor="registrationopen_date" className="form-label">Registrationopen_date</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="registrationopen_date"
-                                name="registrationopen_date"
-                                value={this.state.registrationopen_date}
-                                onChange={this.onChange}
-                            />
-                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="registrationopen_date" className="form-label">Registrationopen_date</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="registrationopen_date"
+                                                name="registrationopen_date"
+                                                value={this.state.registrationopen_date}
+                                                onChange={this.onChange}
+                                            />
+                                        </div>
 
-                        <div className="mb-3">
-                            <label htmlFor="lastregistration_date" className="form-label">Lastregistration_date</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="lastregistration_date"
-                                name="lastregistration_date"
-                                value={this.state.lastregistration_date}
-                                onChange={this.onChange}
-                            />
-                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="lastregistration_date" className="form-label">Lastregistration_date</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="lastregistration_date"
+                                                name="lastregistration_date"
+                                                value={this.state.lastregistration_date}
+                                                onChange={this.onChange}
+                                            />
+                                        </div>
 
-                        <div className="mb-3">
-                            <label htmlFor="is_approved" className="form-label">Is_approved</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="is_approved"
-                                name="is_approved"
-                                value={this.state.is_approved}
-                                onChange={this.onChange}
-                            />
-                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="is_approved" className="form-label">Is_approved</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="is_approved"
+                                                name="is_approved"
+                                                value={this.state.is_approved}
+                                                onChange={this.onChange}
+                                            />
+                                        </div>
 
-                        <br />
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                                        <br />
+                                        <button type="submit" className="btn btn-primary">Submit</button>
 
-                    </form>
+                                    </form>
+                                    </div>
+                                </div>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={4} lg={3}>
+                            <Paper>
+                                <h4>Go to</h4>
+                                <Link to="/editor">
+                                    <Button variant="contained" color="secondary">
+                                        View
+                                    </Button>
+                                </Link>
+                            </Paper>
+                        </Grid>
 
-                </div>
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} md={4} lg={3}>
-                    <Paper>
-                        <h4>Go to</h4>
-                        <Link to="/editor">
-                            <Button variant="contained" color="secondary">
-                               View
-                            </Button>
-                        </Link> 
-                    </Paper>
-                </Grid>
-                
-            </Grid>
+                    </Grid>
 
-        </Container>
+                </Container>
             </>
         )
     }

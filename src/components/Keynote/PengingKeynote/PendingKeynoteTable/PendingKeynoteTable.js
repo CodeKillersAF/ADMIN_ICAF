@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import "./PendingKeynoteTable.css";
@@ -7,26 +6,55 @@ import { useState } from "react";
 import axios from "../../../../axios";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
+import DoneIcon from '@material-ui/icons/Done';
+import Button from "@material-ui/core/Button";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function PendingKeynoteTable() {
   const history = useHistory();
   const [searchTerm, setSearchTerm] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const [approve, setapprove] = React.useState(false);
+  const [keynoteid, setkeynoteid] = useState('');
 
   const [keynotes, setkeynotes] = useState([]);
 
-  async function onClickDelete(e, keynoteID) {
-    await axios.delete("/keynotes/delete-keynote/" + keynoteID);
+  const handleClickOpen = (e,keynoteID) => {
+    setkeynoteid(keynoteID);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const approveHandleClickOpen=(e,keynoteID)=>{
+    setkeynoteid(keynoteID);
+    setapprove(true)
+  }
+  const approveHandleClose=()=>{
+    setapprove(false);
+  }
+
+  async function onClickDelete() {
+    setOpen(false);
+    await axios.delete("/keynotes/delete-keynote/" + keynoteid);
   }
 
   async function fetchData() {
     const req = await axios.get("/keynotes/get-pending-keynotes");
     setkeynotes(req.data.data);
   }
-  async function onClickApprove(e, keynoteID) {
+  async function onClickApprove() {
+    setapprove(false);
     let approve = {
       is_approved: true,
     };
-    await axios.put("/keynotes/update-keynote/" + keynoteID, approve);
+    await axios.put("/keynotes/update-keynote/" + keynoteid, approve);
   }
 
   async function onClickNavigate(e, keynoteID) {
@@ -41,16 +69,10 @@ export default function PendingKeynoteTable() {
   return (
     <div>
       <center>
-      <h1 style={{color:"#3571f1", fontWeight:300}}>Pending Keynotes</h1>
+      <h1 className="pendingKeynoteHeader">Pending Keynotes</h1>
         <form class="container d-flex">
           <input
-            className="form-control"
-            style={{
-              marginTop: 30,
-              marginBottom: 20,
-              width: "40%",
-              marginLeft: 350,
-            }}
+            className="pendingSearch"
             type="search"
             placeholder="Search with speaker name"
             aria-label="Search"
@@ -89,27 +111,81 @@ export default function PendingKeynoteTable() {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={(e) => onClickApprove(e, keynote._id)}
+                  onClick={(e) => approveHandleClickOpen(e, keynote._id)}
+                  endIcon={<DoneIcon/>}
                 >
                   Approve
                 </Button>
               </td>
               <td>
-                <IconButton onClick={(e) => onClickDelete(e, keynote._id)}>
-                  {" "}
-                  <DeleteIcon color="secondary" />{" "}
-                </IconButton>
+              <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={(e) => handleClickOpen(e, keynote._id)}
+                  endIcon={<DeleteIcon/>}
+                >
+                  Delete
+                </Button>
               </td>
               <td>
-                <IconButton onClick={(e) => onClickNavigate(e, keynote._id)}>
-                  {" "}
-                  <EditIcon color="primary" />{" "}
-                </IconButton>
+              <Button
+                  variant="contained"
+                  color="default"
+                  onClick={(e) => onClickNavigate(e, keynote._id)}
+                  endIcon={<EditIcon/>}
+                >
+                  Edit
+                </Button>
               </td>
             </tbody>
           ))}
         </table>
       </center>
+       {/* delete dialog box */}
+       <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This will delete keynote permanent
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={onClickDelete} color="primary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* approve dialog box */}
+      <Dialog
+        open={approve}
+        onClose={approveHandleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This will publish keynote to the users
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={approveHandleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={onClickApprove} color="primary" autoFocus>
+            Approve
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

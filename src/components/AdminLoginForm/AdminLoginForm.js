@@ -46,7 +46,7 @@ export default function AdminLoginForm() {
     <div className="adminLoginForm">
       <Grid>
         <Paper elevation={10} className="adminLoginForm__paper">
-          <h1 className="header">ICAF</h1>
+          <h1 className="loginHeader">ICAF</h1>
           <Divider />
           <Grid className="AdminTextfield">
             <TextField
