@@ -122,20 +122,6 @@ useEffect(() => {
     <br /><br />
     <center>
 
-      <div class="btn-group" role="group" aria-label="Basic outlined example">
-        <button type="button" class="btn btn-outline-primary" onClick={getAllData}>
-          All Users
-        </button>
-        <button type="button" class="btn btn-outline-primary" onClick={getDataAdmin}>
-          Admin
-        </button>
-        <button type="button" class="btn btn-outline-primary" onClick={getDataEditor}>
-          Editor
-        </button>
-        <button type="button" class="btn btn-outline-primary" onClick={getDataReviewer}>
-          Reviewer
-        </button>
-      </div>
 <br />
     <input type="search" class="input-search" placeholder="Search Username" 
       onChange={(e) => {setSearchTerm(e.target.value) }}
