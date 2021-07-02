@@ -14,7 +14,7 @@ function viewtemplate() {
     //get all templates
     const getAllTemplates = async () => {
         try{
-          const data = await axios.get('http://localhost:8080/api/users/templateAllBack')
+          const data = await axios.get('/templateAllBack')
          // console.log(data);
           setState(data.data.data);
         }
@@ -38,7 +38,7 @@ const UpdateTemplate = (id) => {
   //delete data
   const deleteTemplate = (id) => {
     //console.log(id);
-    axios.delete(`http://localhost:8080/api/users/template/delete/${id}`)
+    axios.delete(`/template/delete/${id}`)
      .then((response) => {
        //console.log(response.data);
        alert('Template Deleted');
@@ -70,7 +70,10 @@ const UpdateTemplate = (id) => {
         <tr key={template.topic}>
             <td>{template.topic}</td>
             <td>{template.description}</td>
-            <td><a href={template.url}>Download</a></td>
+            <td>
+            <button className="btn btn-dark btn-md px-4 gap-3"><a href={template.url} 
+              style={{ color: "#fff", textDecoration: "none" }}>Download</a></button>
+            </td>
 
             <td>
                <IconButton onClick={() => {deleteTemplate(template._id)}}> <DeleteIcon color="secondary"/> </IconButton> 
