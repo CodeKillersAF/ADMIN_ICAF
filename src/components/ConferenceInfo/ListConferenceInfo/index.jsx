@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import './styles.css';
+
 
 export default class ListConferenceInfo extends React.Component {
 
@@ -12,7 +14,7 @@ export default class ListConferenceInfo extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('/')
+        axios.get('/conference/')
             .then(response => {
                 this.setState({ approved_details: response.data.data });
             })
@@ -22,25 +24,32 @@ export default class ListConferenceInfo extends React.Component {
         window.location = `/editor/${id}`
     }
 
-    removeInfo(e, id) {
-        axios.delete(`/${id}`)
+    removeInfo(e, id) {     
+        axios.delete(`/conference/${id}`)
+            .then(response => {
+                // alert('Deletion successful!')
+                window.location.reload();
+            })
+            .catch(error => {
+                console.log(error.message);
+                alert(error.message)
+            })
     }
 
 
     render() {
         return (
-            <div>
-                <div>
+            <div className="container">
+                <div className="container">
                     {this.state.approved_details.length > 0 && this.state.approved_details.map((item, index) => (
-                        <div key={index} className="card mb-3">
-                            <div className="p-3" onClick={e => this.navigateUpdatePage(e, item._id)}>
-                                <h5>Venue : {item.venue}</h5>
-                                <h5>Dates : {item.venue_dates}</h5>
-                                <h5>Time : {item.venue_time}</h5>
-                                <h5>Regstration open : {item.registrationopen_date}</h5>
-                                <h5>Regstration close : {item.lastregistration_date}</h5>
-                                <h5>Status : {item.is_approved.toString()}</h5>
-                                {/* <button type="submit" className="btn btn-primary">Approve</button> */}
+                        <div key={index} className="textStyle">
+                            <div onClick={e => this.navigateUpdatePage(e, item._id)}>
+                                <p>Venue : {item.venue}</p>
+                                <p>Dates : {item.venue_dates}</p>
+                                <p>Time : {item.venue_time}</p>
+                                <p>Regstration open : {item.registrationopen_date}</p>
+                                <p>Regstration close : {item.lastregistration_date}</p>
+                                <p>Status : {item.is_approved.toString()}</p>
                             </div>
                             <button type="submit" className="btn btn-danger" onClick={e => this.removeInfo(e, item._id)}>Remove</button>
                         </div>

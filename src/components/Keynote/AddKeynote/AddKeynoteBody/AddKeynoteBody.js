@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import KeynoteForm  from  '../AddKeynoteForm/AddKeynoteForm';
 const useStyles = makeStyles((theme) => ({
     container: {
-      paddingTop: theme.spacing(4),
+      paddingTop: 60,
       paddingBottom: theme.spacing(4),
     },
     paper: {
@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       overflow: 'auto',
       flexDirection: 'column',
+      paddingTop: 60
     },
     fixedHeight: {
       height: 600,
@@ -30,9 +31,9 @@ export default function AddKeynoteBody() {
           <Grid container spacing={3}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={12}>
-              <Paper className={fixedHeightPaper}>
+              {/* <Paper className={fixedHeightPaper}> */}
                   <KeynoteForm/>
-              </Paper>
+              {/* </Paper> */}
             </Grid>
           
           </Grid>

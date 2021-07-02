@@ -2,17 +2,19 @@
 .addKeynoteForm__paper{
   margin: auto;
   width: 600px !important;
-    height: 480px !important;
+    height: 530px !important;
     align-items: center !important;
   
 }
-.header{
+.addKeynoteHeader{
   text-align: center;
-  height: 50px;
+  height: 80px !important;
   color: #3571f1;
+  padding-top: 20px;
+  font-size: 30px !important;
   
 }
-.textfield .MuiTextField-root {
+.addKeynotetextfield .MuiTextField-root {
   
   
   margin-top: 20px;

@@ -8,9 +8,20 @@ import axios from "../../../../axios";
 import { useHistory, useParams } from "react-router-dom";
 import { storage } from "../../../../firebase";
 import { TextareaAutosize } from "@material-ui/core";
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+}));
 
 export default function UpdateKeynoteForm() {
   const hitstory = useHistory();
+  const classes = useStyles();
   const [speakerName, setspeakerName] = useState("");
   const [description, setdescription] = useState("");
   const [position, setposition] = useState("");
@@ -18,6 +29,7 @@ export default function UpdateKeynoteForm() {
   const [file, setfile] = useState(null);
   const [speakerImageUrl, setspeakerImageUrl] = useState("");
   const [imageUploaded, setimageUploaded] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   async function fetchData() {
     await axios.get("/keynotes/get-keynotes/" + id).then((response) => {
@@ -28,6 +40,7 @@ export default function UpdateKeynoteForm() {
   }
   
   async function uploadFile() {
+    setOpen(!open);
     let bucketName = "keynoteImages";
     let uploadTask = storage.ref(`${bucketName}/${file.name}`).put(file);
     await uploadTask.on(
@@ -47,6 +60,8 @@ export default function UpdateKeynoteForm() {
             setspeakerImageUrl(firebaseURl);
             console.log(firebaseURl);
             setimageUploaded(true);
+            setOpen(false);
+            alert("Image uploaded");
             
           });
       }
@@ -56,7 +71,8 @@ export default function UpdateKeynoteForm() {
     fetchData();
   }, []);
 
-  async function updateKeynote() {
+  async function updateKeynote(e) {
+    e.preventDefault();
       if(imageUploaded)
       {
         let keynote = {
@@ -88,6 +104,11 @@ export default function UpdateKeynoteForm() {
 
   return (
     <div>
+      <Backdrop className={classes.backdrop} open={open}>
+        <CircularProgress color="inherit" />
+       {" "} Uploading....
+      </Backdrop>
+      <form onSubmit={updateKeynote}>
       <Paper elevation={10} className="keynoteForm__paper">
         <h1 className="header">Update Keynote</h1>
         <Divider />
@@ -99,7 +120,7 @@ export default function UpdateKeynoteForm() {
             name="speakerName"
             value={speakerName}
             onChange={(e) => setspeakerName(e.target.value)}
-            required
+            required={true}
           />
           <TextField
             size="medium"
@@ -108,7 +129,7 @@ export default function UpdateKeynoteForm() {
             name="position"
             value={position}
             onChange={(e) => setposition(e.target.value)}
-            required
+            required={true}
           />
           <TextareaAutosize
             rowsMax={4}
@@ -118,7 +139,7 @@ export default function UpdateKeynoteForm() {
             name="description"
             value={description}
             onChange={(e) => setdescription(e.target.value)}
-            required
+            required={true}
           />
         </Grid>
         <input type="file" className="uploadButton" onChange={onImageSelect} />
@@ -129,11 +150,12 @@ export default function UpdateKeynoteForm() {
           variant="contained"
           color="secondary"
           className="button"
-          onClick={updateKeynote}
+          type="submit"
         >
           update
         </Button>
       </Paper>
+      </form>
     </div>
   );
 }
