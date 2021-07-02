@@ -1,17 +1,33 @@
 import React, { useEffect } from "react";
-import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import "./ApprovedKeynoteTable.css";
 import { useState } from "react";
 import axios from "../../../../axios";
 import { useHistory } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function ApprovedKeynoteTable() {
   const history = useHistory();
+  const [open, setOpen] = React.useState(false);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [keynotes, setkeynotes] = useState([]);
+  const [keynoteid, setkeynoteid] = useState('');
+
+  const handleClickOpen = (e,keynoteID) => {
+    setkeynoteid(keynoteID);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -21,7 +37,14 @@ export default function ApprovedKeynoteTable() {
       setkeynotes(req.data.data);
     }
     fetchData();
-  });
+  },[onClickDelete]);
+
+  async function onClickDelete() {
+    setOpen(false);
+    await axios.delete("/keynotes/delete-keynote/" + keynoteid);
+    setkeynoteid('');
+  }
+
   async function onClickNavigate(e, keynoteID) {
     const path = `/update-keynote/` + keynoteID;
     history.push(path);
@@ -30,16 +53,10 @@ export default function ApprovedKeynoteTable() {
   return (
     <div>
       <center>
-        <h1 style={{color:"#3571f1"}}>Approved Keynotes</h1>
+        <h1 className="approvedKeynoteHeader">Approved Keynotes</h1>
         <form class="container d-flex">
           <input
-            className="form-control"
-            style={{
-              marginTop: 30,
-              marginBottom: 20,
-              width: "40%",
-              marginLeft: 350,
-            }}
+            className="approvedSearch"
             type="search"
             placeholder="Search with speaker name"
             aria-label="Search"
@@ -73,21 +90,52 @@ export default function ApprovedKeynoteTable() {
               <td>{keynote.position}</td>
 
               <td>
-                <IconButton>
-                  {" "}
-                  <DeleteIcon color="secondary" />{" "}
-                </IconButton>
+              <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={(e) => handleClickOpen(e, keynote._id)}
+                  endIcon={<DeleteIcon/>}
+                >
+                  Delete
+                </Button>
               </td>
               <td>
-                <IconButton onClick={(e) => onClickNavigate(e, keynote._id)}>
-                  {" "}
-                  <EditIcon color="primary" />{" "}
-                </IconButton>
+              <Button
+                  variant="contained"
+                  color="default"
+                  onClick={(e) => onClickNavigate(e, keynote._id)}
+                  endIcon={<EditIcon/>}
+                >
+                  Edit
+                </Button>
               </td>
             </tbody>
           ))}
         </table>
       </center>
+
+      {/* dialog box */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This will delete keynote permanent
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={onClickDelete} color="primary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

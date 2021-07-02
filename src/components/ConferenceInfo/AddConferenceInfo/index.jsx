@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from '../../../axios'
+import './styles.css';
 
 const initialState = {
     venue: '',
@@ -40,6 +41,13 @@ export default class AddConferenceInfo extends React.Component {
                 console.log(error.message);
                 alert(error.message)
             })
+        this.setState({
+            venue: '',
+            venue_dates: '',
+            venue_time: '',
+            registrationopen_date: '',
+            lastregistration_date: ''
+        })
     }
 
 
@@ -58,6 +66,7 @@ export default class AddConferenceInfo extends React.Component {
                                 name="venue"
                                 value={this.state.venue}
                                 onChange={this.onChange}
+                                required
                             />
                         </div>
 
@@ -70,6 +79,7 @@ export default class AddConferenceInfo extends React.Component {
                                 name="venue_dates"
                                 value={this.state.venue_dates}
                                 onChange={this.onChange}
+                                required
                             />
                         </div>
 
@@ -82,6 +92,7 @@ export default class AddConferenceInfo extends React.Component {
                                 name="venue_time"
                                 value={this.state.venue_time}
                                 onChange={this.onChange}
+                                required
                             />
                         </div>
 
@@ -94,6 +105,7 @@ export default class AddConferenceInfo extends React.Component {
                                 name="registrationopen_date"
                                 value={this.state.registrationopen_date}
                                 onChange={this.onChange}
+                                required
                             />
                         </div>
 
@@ -106,6 +118,7 @@ export default class AddConferenceInfo extends React.Component {
                                 name="lastregistration_date"
                                 value={this.state.lastregistration_date}
                                 onChange={this.onChange}
+                                required
                             />
                         </div>
 
