@@ -6,12 +6,28 @@ import { useState } from "react";
 import axios from "../../../../axios";
 import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function ApprovedKeynoteTable() {
   const history = useHistory();
+  const [open, setOpen] = React.useState(false);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [keynotes, setkeynotes] = useState([]);
+  const [keynoteid, setkeynoteid] = useState('');
+
+  const handleClickOpen = (e,keynoteID) => {
+    setkeynoteid(keynoteID);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -23,8 +39,10 @@ export default function ApprovedKeynoteTable() {
     fetchData();
   },[onClickDelete]);
 
-  async function onClickDelete(e, keynoteID) {
-    await axios.delete("/keynotes/delete-keynote/" + keynoteID);
+  async function onClickDelete() {
+    setOpen(false);
+    await axios.delete("/keynotes/delete-keynote/" + keynoteid);
+    setkeynoteid('');
   }
 
   async function onClickNavigate(e, keynoteID) {
@@ -75,7 +93,7 @@ export default function ApprovedKeynoteTable() {
               <Button
                   variant="contained"
                   color="secondary"
-                  onClick={(e) => onClickDelete(e, keynote._id)}
+                  onClick={(e) => handleClickOpen(e, keynote._id)}
                   endIcon={<DeleteIcon/>}
                 >
                   Delete
@@ -95,6 +113,29 @@ export default function ApprovedKeynoteTable() {
           ))}
         </table>
       </center>
+
+      {/* dialog box */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This will delete keynote permanent
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={onClickDelete} color="primary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

@@ -7,26 +7,54 @@ import axios from "../../../../axios";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import DoneIcon from '@material-ui/icons/Done';
+import Button from "@material-ui/core/Button";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function PendingKeynoteTable() {
   const history = useHistory();
   const [searchTerm, setSearchTerm] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const [approve, setapprove] = React.useState(false);
+  const [keynoteid, setkeynoteid] = useState('');
 
   const [keynotes, setkeynotes] = useState([]);
 
-  async function onClickDelete(e, keynoteID) {
-    await axios.delete("/keynotes/delete-keynote/" + keynoteID);
+  const handleClickOpen = (e,keynoteID) => {
+    setkeynoteid(keynoteID);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const approveHandleClickOpen=(e,keynoteID)=>{
+    setkeynoteid(keynoteID);
+    setapprove(true)
+  }
+  const approveHandleClose=()=>{
+    setapprove(false);
+  }
+
+  async function onClickDelete() {
+    setOpen(false);
+    await axios.delete("/keynotes/delete-keynote/" + keynoteid);
   }
 
   async function fetchData() {
     const req = await axios.get("/keynotes/get-pending-keynotes");
     setkeynotes(req.data.data);
   }
-  async function onClickApprove(e, keynoteID) {
+  async function onClickApprove() {
+    setapprove(false);
     let approve = {
       is_approved: true,
     };
-    await axios.put("/keynotes/update-keynote/" + keynoteID, approve);
+    await axios.put("/keynotes/update-keynote/" + keynoteid, approve);
   }
 
   async function onClickNavigate(e, keynoteID) {
@@ -83,7 +111,7 @@ export default function PendingKeynoteTable() {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={(e) => onClickApprove(e, keynote._id)}
+                  onClick={(e) => approveHandleClickOpen(e, keynote._id)}
                   endIcon={<DoneIcon/>}
                 >
                   Approve
@@ -93,7 +121,7 @@ export default function PendingKeynoteTable() {
               <Button
                   variant="contained"
                   color="secondary"
-                  onClick={(e) => onClickDelete(e, keynote._id)}
+                  onClick={(e) => handleClickOpen(e, keynote._id)}
                   endIcon={<DeleteIcon/>}
                 >
                   Delete
@@ -113,6 +141,51 @@ export default function PendingKeynoteTable() {
           ))}
         </table>
       </center>
+       {/* delete dialog box */}
+       <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This will delete keynote permanent
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={onClickDelete} color="primary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* approve dialog box */}
+      <Dialog
+        open={approve}
+        onClose={approveHandleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This will publish keynote to the users
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={approveHandleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={onClickApprove} color="primary" autoFocus>
+            Approve
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

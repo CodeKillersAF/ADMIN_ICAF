@@ -106,7 +106,7 @@ export default function UpdateKeynoteForm() {
     <div>
       <Backdrop className={classes.backdrop} open={open}>
         <CircularProgress color="inherit" />
-        Uploading....
+       {" "} Uploading....
       </Backdrop>
       <form onSubmit={updateKeynote}>
       <Paper elevation={10} className="keynoteForm__paper">
