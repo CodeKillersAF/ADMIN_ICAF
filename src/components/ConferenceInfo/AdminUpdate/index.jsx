@@ -1,6 +1,7 @@
 import React from 'react';
-import axios from '../../../axios'
+import axios from 'axios';
 import './styles.css';
+
 
 export default class AdminUpdate extends React.Component {
 
@@ -13,7 +14,7 @@ export default class AdminUpdate extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('/conference-detail')
+        axios.get('/')
             .then(response => {
                 this.setState({ approved_details: response.data.data });
             })
@@ -23,7 +24,7 @@ export default class AdminUpdate extends React.Component {
         let status = {
             is_approved: true
         }
-        axios.put(`/conference-detail/update-status/${id}`, status)
+        axios.put(`/update-status/${id}`, status)
             .then(response => {
                 alert('Conference status approved!')
                 window.location.reload();
@@ -38,7 +39,7 @@ export default class AdminUpdate extends React.Component {
         let status = {
             is_approved: false
         }
-        axios.put(`/conference-detail/update-status/${id}`, status)
+        axios.put(`/update-status/${id}`, status)
             .then(response => {
                 alert('Conference status rejected!')
                 window.location.reload();

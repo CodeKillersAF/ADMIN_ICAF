@@ -8,6 +8,7 @@ import { green } from '@material-ui/core/colors';
 import {useHistory } from 'react-router-dom';
 import BuildIcon from '@material-ui/icons/Build';
 
+
 export default function AdminViewUser() {
   const [state, setState] = useState([]);
 
@@ -135,20 +136,11 @@ useEffect(() => {
           Reviewer
         </button>
       </div>
-
-      <form class="container d-flex">
-        <input className="form-control"
-          style={{ marginTop: 50, marginBottom: 20, width: "40%", marginLeft: 50 }} 
-          type="search" 
-          placeholder="Search With Username" 
-          aria-label="Search" 
-          onChange={(e) => {setSearchTerm(e.target.value) }}
-        />
-        {/* <button class="btn btn-outline-success" type="submit">Search</button> */}
-      </form>
-
-
-{/* <div className="styled-table"> */}
+<br />
+    <input type="search" class="input-search" placeholder="Search Username" 
+      onChange={(e) => {setSearchTerm(e.target.value) }}
+    />
+    <br /><br />
       <table className="styled-table table-bordered">
     <thead>
         <tr>
