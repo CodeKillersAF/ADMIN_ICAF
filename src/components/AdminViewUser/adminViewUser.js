@@ -18,7 +18,7 @@ export default function AdminViewUser() {
 
   const getAllData = async () => {
     try{
-      const data = await axios.get('http://localhost:8080/api/users/getAll')
+      const data = await axios.get('/role_manage/getAll')
       console.log(data);
       setState(data.data.data);
     }
@@ -32,7 +32,7 @@ export default function AdminViewUser() {
   const getDataAdmin = async () => {
     try {
       const data = await axios.get(
-        "http://localhost:8080/api/users/getRole/admin"
+        "/role_manage/getRole/admin"
       );
       //console.log(data.data.data);
       setState(data.data.data);
@@ -46,7 +46,7 @@ export default function AdminViewUser() {
   const getDataEditor = async () => {
     try {
       const data = await axios.get(
-        "http://localhost:8080/api/users/getRole/editor"
+        "/role_manage/getRole/editor"
       );
       console.log(data.data.data);
       setState(data.data.data);
@@ -60,7 +60,7 @@ export default function AdminViewUser() {
   const getDataReviewer = async () => {
     try {
       const data = await axios.get(
-        "http://localhost:8080/api/users/getRole/reviewer"
+        "/role_manage/getRole/reviewer"
       );
       //console.log(data.data.data);
       setState(data.data.data);
@@ -78,7 +78,7 @@ export default function AdminViewUser() {
     //console.log(id);
     //console.log(role);
 
-    axios.delete(`http://localhost:8080/api/users/delete/${id}`)
+    axios.delete(`/role_manage/delete/${id}`)
      .then((response) => {
        //console.log(response.data);
        alert(response.data.data);
