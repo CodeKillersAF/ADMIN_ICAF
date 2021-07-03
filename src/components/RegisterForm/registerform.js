@@ -22,7 +22,7 @@ function registerform() {
 
     //console.log(user);
 
-    await axios.post('http://localhost:8080/api/users/register-user', user)
+    await axios.post('/register-user', user)
     .then((response) => {
         console.log(response.data);
         alert(response.data.message);

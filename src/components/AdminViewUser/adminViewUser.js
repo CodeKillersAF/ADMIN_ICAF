@@ -21,7 +21,7 @@ export default function AdminViewUser() {
 
   const getAllData = async () => {
     try{
-      const data = await axios.get('/getAll')
+      const data = await axios.get('/role_manage/getAll')
       console.log(data);
       setState(data.data.data);
     }
@@ -35,7 +35,7 @@ export default function AdminViewUser() {
   const getDataAdmin = async () => {
     try {
       const data = await axios.get(
-        "/getRole/admin"
+        "/role_manage/getRole/admin"
       );
       //console.log(data.data.data);
       setState(data.data.data);
@@ -49,7 +49,7 @@ export default function AdminViewUser() {
   const getDataEditor = async () => {
     try {
       const data = await axios.get(
-        "/getRole/editor"
+        "/role_manage/getRole/editor"
       );
       console.log(data.data.data);
       setState(data.data.data);
@@ -63,7 +63,7 @@ export default function AdminViewUser() {
   const getDataReviewer = async () => {
     try {
       const data = await axios.get(
-        "/getRole/reviewer"
+        "/role_manage/getRole/reviewer"
       );
       //console.log(data.data.data);
       setState(data.data.data);
@@ -79,7 +79,7 @@ export default function AdminViewUser() {
     //console.log(id);
     //console.log(role);
 
-    axios.delete(`/delete/${id}`)
+    axios.delete(`/role_manage/delete/${id}`)
      .then((response) => {
        //console.log(response.data);
        alert(response.data.data);
