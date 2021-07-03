@@ -7,6 +7,9 @@ import './admintable.css';
 import { green } from '@material-ui/core/colors';
 import {useHistory } from 'react-router-dom';
 import BuildIcon from '@material-ui/icons/Build';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+
 
 export default function AdminViewUser() {
   const [state, setState] = useState([]);
@@ -71,8 +74,6 @@ export default function AdminViewUser() {
   };
 
 
-
-  useEffect(() => {
   //delete data
   const handleDelete = (id, role) => {
     //console.log(id);
@@ -97,7 +98,7 @@ export default function AdminViewUser() {
        alert(error.message);
      })
   };
-}, []);
+
 
   //update role path set
 const UpdateRole = (id) => {
@@ -120,35 +121,18 @@ useEffect(() => {
     <div>
     <br /><br />
     <center>
+      <ButtonGroup size="large" variant="contained" color="primary" aria-label="contained primary button group">
+        <Button onClick={getAllData}>All Users</Button>
+        <Button onClick={getDataAdmin}>Admin</Button>
+        <Button onClick={getDataEditor}>Editor</Button>
+        <Button onClick={getDataReviewer}>Reviewer</Button>
+      </ButtonGroup>
 
-      <div class="btn-group" role="group" aria-label="Basic outlined example">
-        <button type="button" class="btn btn-outline-primary" onClick={getAllData}>
-          All Users
-        </button>
-        <button type="button" class="btn btn-outline-primary" onClick={getDataAdmin}>
-          Admin
-        </button>
-        <button type="button" class="btn btn-outline-primary" onClick={getDataEditor}>
-          Editor
-        </button>
-        <button type="button" class="btn btn-outline-primary" onClick={getDataReviewer}>
-          Reviewer
-        </button>
-      </div>
-
-      <form class="container d-flex">
-        <input className="form-control"
-          style={{ marginTop: 50, marginBottom: 20, width: "40%", marginLeft: 50 }} 
-          type="search" 
-          placeholder="Search With Username" 
-          aria-label="Search" 
-          onChange={(e) => {setSearchTerm(e.target.value) }}
-        />
-        {/* <button class="btn btn-outline-success" type="submit">Search</button> */}
-      </form>
-
-
-{/* <div className="styled-table"> */}
+<br />
+    <input type="search" class="input-search" placeholder="Search Username" 
+      onChange={(e) => {setSearchTerm(e.target.value) }}
+    />
+    <br /><br />
       <table className="styled-table table-bordered">
     <thead>
         <tr>

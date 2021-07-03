@@ -18,7 +18,6 @@ export default function AdminLoginForm() {
 
   const history = useHistory();
 
-
   const onFormClick =async()=>{
 
     let user={
@@ -46,11 +45,11 @@ export default function AdminLoginForm() {
     <div className="adminLoginForm">
       <Grid>
         <Paper elevation={10} className="adminLoginForm__paper">
-          <h1 className="header">ICAF</h1>
+          <h1 className="loginHeader">ICAF</h1>
           <Divider />
           <Grid className="AdminTextfield">
             <TextField
-              size="medium"
+              size="small"
               id="outlined-basic"
               label="Username"
               variant="outlined"
@@ -59,12 +58,12 @@ export default function AdminLoginForm() {
               onChange={(e)=>setusername(e.target.value)}
             />
             <TextField
-              size="medium"
+              size="small"
               id="outlined-basic"
               label="Password"
               variant="outlined"
               name="password"
-              value={password}
+              type="password"
               onChange={(e)=>setpassword(e.target.value)}
             />
           </Grid>
