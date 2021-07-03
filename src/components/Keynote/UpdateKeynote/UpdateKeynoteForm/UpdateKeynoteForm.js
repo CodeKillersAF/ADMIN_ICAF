@@ -30,6 +30,7 @@ export default function UpdateKeynoteForm() {
   const [speakerImageUrl, setspeakerImageUrl] = useState("");
   const [imageUploaded, setimageUploaded] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const [emailopen, setemailopen] = useState(false)
 
   async function fetchData() {
     await axios.get("/keynote/get-keynotes/" + id).then((response) => {
@@ -61,8 +62,6 @@ export default function UpdateKeynoteForm() {
             console.log(firebaseURl);
             setimageUploaded(true);
             setOpen(false);
-            alert("Image uploaded");
-            
           });
       }
     );
@@ -82,12 +81,16 @@ export default function UpdateKeynoteForm() {
             is_approved: false,
             speakerImageUrl : speakerImageUrl
           };
-      
+          setemailopen(!emailopen);
           await axios
             .put("/keynote/update-keynote/" + id, keynote)
             .then((response) => {
-              console.log("updated");
+              axios.post("/keynote/send-mail")
+              .then((response)=>{
+                setemailopen(false);
               history.go(-1);
+              })
+              
             });
       }
       else
@@ -107,6 +110,10 @@ export default function UpdateKeynoteForm() {
       <Backdrop className={classes.backdrop} open={open}>
         <CircularProgress color="inherit" />
        {" "} Uploading....
+      </Backdrop>
+      <Backdrop className={classes.backdrop} open={emailopen}>
+        <CircularProgress color="inherit" />
+       {" "} Email sending....
       </Backdrop>
       <form onSubmit={updateKeynote}>
       <Paper elevation={10} className="keynoteForm__paper">
