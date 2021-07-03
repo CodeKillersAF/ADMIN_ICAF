@@ -54,7 +54,7 @@ export default function ApprovedKeynoteTable() {
     <div>
       <center>
         <h1 className="approvedKeynoteHeader">Approved Keynotes</h1>
-        <form class="container d-flex">
+        <form>
           <input
             className="approvedSearch"
             type="search"

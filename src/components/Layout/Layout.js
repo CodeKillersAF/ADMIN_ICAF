@@ -87,16 +87,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Layout({ children }) {
 
-  useEffect(() => {
-
-    axios.get('/home')
-    .then(res => {
-      console.log(res);
-    }),
-    err => {
-      console.log(err);
-    }
-  });
  
 
 

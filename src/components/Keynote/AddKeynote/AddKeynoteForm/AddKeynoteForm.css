@@ -1,45 +1,45 @@
 
-.addKeynoteForm__paper{
-  margin: auto;
+.addnewKeynoteForm__paper{
+  margin: auto !important;
   width: 600px !important;
-    height: 530px !important;
+    height: 510px !important;
     align-items: center !important;
   
 }
-.addKeynoteHeader{
-  text-align: center;
+.addnewKeynoteHeader{
+  text-align: center !important;
   height: 80px !important;
-  color: #3571f1;
+  color: #3571f1 !important;
   padding-top: 20px;
   font-size: 30px !important;
   
 }
-.addKeynotetextfield .MuiTextField-root {
+.addnewKeynotetextfield .MuiTextField-root {
   
   
-  margin-top: 20px;
+  margin-top: 30px !important;
   width: 550px !important;
   margin-left: 26px !important;
   
 }
 
-.button{
+.addnewkeynotebutton{
   margin-top: 5px !important;
   width: 550px !important;
-  height: 45px;
-  margin-left: 26px !important;
+  height: 45px !important;
+  margin-right: 26px !important;
  
 }
-.uploadButton{
-  margin-top: 20px;
-  margin-left: 26px;
+.addnewKeynoteuploadButton{
+  margin-top: 20px !important;
+  margin-left: 26px !important;
   width: 400px !important;
-  height: 50px;
+  height: 50px !important;
 }
 .textarea{
   width: 550px !important;
-  margin-top: 20px;
-  margin-left: 26px;
+  margin-top: 30px !important;
+  margin-left: 26px !important;
   height: 100px !important;
   
 }

@@ -1,7 +1,7 @@
 .keynoteForm__paper{
     margin: auto;
     width: 600px !important;
-      height: 500px !important;
+      height: 520px !important;
       align-items: center !important;
     
   }
@@ -22,20 +22,20 @@
     
   }
   
-  .button{
+  .updatekeynotebutton{
     margin-top: 5px !important;
     width: 550px !important;
     height: 45px;
-    margin-left: 26px !important;
+    margin-right: 26px !important;
    
   }
-  .uploadButton{
+  .updatekeynoteuploadButton{
     margin-top: 20px;
     margin-left: 26px;
     width: 400px !important;
     height: 50px;
   }
-  .textarea{
+  .uploadtextarea{
     width: 550px !important;
     margin-top: 30px;
     margin-left: 26px;

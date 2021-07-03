@@ -70,7 +70,7 @@ export default function PendingKeynoteTable() {
     <div>
       <center>
       <h1 className="pendingKeynoteHeader">Pending Keynotes</h1>
-        <form class="container d-flex">
+        <form>
           <input
             className="pendingSearch"
             type="search"
