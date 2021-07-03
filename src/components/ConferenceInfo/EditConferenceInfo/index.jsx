@@ -26,7 +26,7 @@ export default class EditConferenceInfo extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`/${this.props.match.params.id}`)
+        axios.get(`/conference/${this.props.match.params.id}`)
             .then(response => {
 
                 this.setState({ venue: response.data.data.venue });
@@ -58,7 +58,7 @@ export default class EditConferenceInfo extends React.Component {
 
         };
         console.log('Data to send', conferenceinfo)
-        axios.put('/' + this.props.match.params.id, conferenceinfo)
+        axios.put('/conference/' + this.props.match.params.id, conferenceinfo)
             .then(response => {
                 alert('Conference detail updated successfully')
             })

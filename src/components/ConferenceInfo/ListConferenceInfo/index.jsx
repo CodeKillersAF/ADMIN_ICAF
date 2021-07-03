@@ -14,7 +14,7 @@ export default class ListConferenceInfo extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('/conference/')
+        axios.get('/conference')
             .then(response => {
                 this.setState({ approved_details: response.data.data });
             })
