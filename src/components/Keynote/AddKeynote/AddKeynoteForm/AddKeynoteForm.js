@@ -40,6 +40,7 @@ export default function KeynoteForm() {
         position: position,
         speakerImageUrl: speakerImageUrl,
       };
+      console.log(keynote);
 
       await axios
         .post("/keynote/add-keynote", keynote)
@@ -94,10 +95,10 @@ export default function KeynoteForm() {
         <CircularProgress color="inherit" /> Uploading....
       </Backdrop>
       <form onSubmit={addKeynote}>
-        <Paper elevation={10} className="addKeynoteForm__paper">
-          <h1 className="addKeynoteHeader">Create Keynote</h1>
+        <Paper elevation={10} className="addnewKeynoteForm__paper">
+          <h1 className="addnewKeynoteHeader">Create Keynote</h1>
           <Divider />
-          <Grid className="addKeynotetextfield">
+          <Grid className="addnewKeynotetextfield">
             <TextField
               size="medium"
               id="outlined-basic"
@@ -132,16 +133,16 @@ export default function KeynoteForm() {
           </Grid>
           <input
             type="file"
-            className="uploadButton"
+            className="addnewKeynoteuploadButton"
             onChange={onImageSelect}
           />
-          <Button variant="contained" color="primary" onClick={uploadFile}>
+          <Button variant="contained" color="primary" onClick={uploadFile} >
             Upload Image
           </Button>
           <Button
             variant="contained"
             color="secondary"
-            className="button"
+            className="addnewkeynotebutton"
             type="submit"
           >
             Create

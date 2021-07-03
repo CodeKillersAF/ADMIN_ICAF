@@ -135,21 +135,21 @@ export default function UpdateKeynoteForm() {
             rowsMax={4}
             aria-label="maximum height"
             placeholder="Description"
-            className="textarea"
+            className="uploadtextarea"
             name="description"
             value={description}
             onChange={(e) => setdescription(e.target.value)}
             required={true}
           />
         </Grid>
-        <input type="file" className="uploadButton" onChange={onImageSelect} />
+        <input type="file" className="updatekeynoteuploadButton" onChange={onImageSelect} />
         <Button variant="contained" color="primary" onClick={uploadFile}>
           Upload Image
         </Button>
         <Button
           variant="contained"
           color="secondary"
-          className="button"
+          className="updatekeynotebutton"
           type="submit"
         >
           update
