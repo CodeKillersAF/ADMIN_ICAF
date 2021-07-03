@@ -4,13 +4,13 @@ import { Paper, TextField } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import { Button } from "@material-ui/core";
-import axios from "../../../../axios";
 import { storage } from "../../../../firebase";
 import { TextareaAutosize } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useHistory } from "react-router-dom";
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -42,7 +42,7 @@ export default function KeynoteForm() {
       };
 
       await axios
-        .post("/keynotes/add-keynote", keynote)
+        .post("/keynote/add-keynote", keynote)
         .then((response) => {
           console.log(response.data);
           setimageUploaded(false);
@@ -58,7 +58,6 @@ export default function KeynoteForm() {
   }
 
   function onImageSelect(e) {
-    console.log("dknjdnjd");
     setfile(e.target.files[0]);
   }
 

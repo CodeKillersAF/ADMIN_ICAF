@@ -3,7 +3,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import "./ApprovedKeynoteTable.css";
 import { useState } from "react";
-import axios from "../../../../axios";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Dialog from '@material-ui/core/Dialog';
@@ -31,7 +31,7 @@ export default function ApprovedKeynoteTable() {
 
   useEffect(() => {
     async function fetchData() {
-      const req = await axios("/keynotes/get-approved-keynotes");
+      const req = await axios("/keynote/get-approved-keynotes");
 
       console.log(req.data.data);
       setkeynotes(req.data.data);
@@ -41,7 +41,7 @@ export default function ApprovedKeynoteTable() {
 
   async function onClickDelete() {
     setOpen(false);
-    await axios.delete("/keynotes/delete-keynote/" + keynoteid);
+    await axios.delete("/keynote/delete-keynote/" + keynoteid);
     setkeynoteid('');
   }
 

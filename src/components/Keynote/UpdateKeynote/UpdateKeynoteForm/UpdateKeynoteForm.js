@@ -4,7 +4,7 @@ import { Paper, TextField } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import { Button } from "@material-ui/core";
-import axios from "../../../../axios";
+import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 import { storage } from "../../../../firebase";
 import { TextareaAutosize } from "@material-ui/core";
@@ -32,7 +32,7 @@ export default function UpdateKeynoteForm() {
   const [open, setOpen] = React.useState(false);
 
   async function fetchData() {
-    await axios.get("/keynotes/get-keynotes/" + id).then((response) => {
+    await axios.get("/keynote/get-keynotes/" + id).then((response) => {
       setspeakerName(response.data.data.speakerName);
       setposition(response.data.data.position);
       setdescription(response.data.data.description);
@@ -84,7 +84,7 @@ export default function UpdateKeynoteForm() {
           };
       
           await axios
-            .put("/keynotes/update-keynote/" + id, keynote)
+            .put("/keynote/update-keynote/" + id, keynote)
             .then((response) => {
               console.log("updated");
               history.go(-1);
