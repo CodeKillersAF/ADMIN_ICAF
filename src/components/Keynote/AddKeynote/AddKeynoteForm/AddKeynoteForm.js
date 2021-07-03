@@ -10,7 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useHistory } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -28,7 +28,7 @@ export default function KeynoteForm() {
   const [file, setfile] = useState(null);
   const [speakerImageUrl, setspeakerImageUrl] = useState("");
   const [imageUploaded, setimageUploaded] = useState(false);
-
+  const [emailopen, setemailopen] = useState(false);
   const [open, setOpen] = React.useState(false);
 
   async function addKeynote(e) {
@@ -47,8 +47,12 @@ export default function KeynoteForm() {
         .then((response) => {
           console.log(response.data);
           setimageUploaded(false);
-          const path = `/pending-keynote`;
-          history.push(path);
+          setemailopen(!emailopen);
+          axios.post("/keynote/send-mail").then((reponse) => {
+            setemailopen(false);
+            const path = `/pending-keynote`;
+            history.push(path);
+          });
         })
         .catch((error) => {
           console.log(error);
@@ -94,6 +98,9 @@ export default function KeynoteForm() {
       <Backdrop className={classes.backdrop} open={open}>
         <CircularProgress color="inherit" /> Uploading....
       </Backdrop>
+      <Backdrop className={classes.backdrop} open={emailopen}>
+        <CircularProgress color="inherit" /> Email sending....
+      </Backdrop>
       <form onSubmit={addKeynote}>
         <Paper elevation={10} className="addnewKeynoteForm__paper">
           <h1 className="addnewKeynoteHeader">Create Keynote</h1>
@@ -136,7 +143,7 @@ export default function KeynoteForm() {
             className="addnewKeynoteuploadButton"
             onChange={onImageSelect}
           />
-          <Button variant="contained" color="primary" onClick={uploadFile} >
+          <Button variant="contained" color="primary" onClick={uploadFile}>
             Upload Image
           </Button>
           <Button
