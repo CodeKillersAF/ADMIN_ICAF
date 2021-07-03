@@ -31,7 +31,7 @@ useEffect(() => {
   //render to update page
 const UpdateTemplate = (id) => {
     // console.log(id);
-    let path = `/template/update-template/${id}`
+    let path = `/update-template/${id}`
     history.push(path);
 }
 

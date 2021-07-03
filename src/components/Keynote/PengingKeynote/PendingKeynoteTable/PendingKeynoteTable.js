@@ -3,7 +3,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import "./PendingKeynoteTable.css";
 import { useState } from "react";
-import axios from "../../../../axios";
+import axios from "axios";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import DoneIcon from '@material-ui/icons/Done';
@@ -42,11 +42,11 @@ export default function PendingKeynoteTable() {
 
   async function onClickDelete() {
     setOpen(false);
-    await axios.delete("/keynotes/delete-keynote/" + keynoteid);
+    await axios.delete("/keynote/delete-keynote/" + keynoteid);
   }
 
   async function fetchData() {
-    const req = await axios.get("/keynotes/get-pending-keynotes");
+    const req = await axios.get("/keynote/get-pending-keynotes");
     setkeynotes(req.data.data);
   }
   async function onClickApprove() {
@@ -54,7 +54,7 @@ export default function PendingKeynoteTable() {
     let approve = {
       is_approved: true,
     };
-    await axios.put("/keynotes/update-keynote/" + keynoteid, approve);
+    await axios.put("/keynote/approve-keynote/" + keynoteid, approve);
   }
 
   async function onClickNavigate(e, keynoteID) {
@@ -70,7 +70,7 @@ export default function PendingKeynoteTable() {
     <div>
       <center>
       <h1 className="pendingKeynoteHeader">Pending Keynotes</h1>
-        <form class="container d-flex">
+        <form>
           <input
             className="pendingSearch"
             type="search"

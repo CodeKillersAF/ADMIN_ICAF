@@ -13,7 +13,7 @@ function admineditdata() {
 
   const getData = async () => {
     const data = await axios.get(
-      `http://localhost:8080/api/users/finduser/${params.id}`
+      `/role_manage/finduser/${params.id}`
     );
     //console.log(data.data.data);
     setName(data.data.data.name);
@@ -35,7 +35,7 @@ function admineditdata() {
         email: email,
         username: userName
     }
-    const updateData = await axios.put(`http://localhost:8080/api/users/update/${params.id}`, updateUserDetails)
+    const updateData = await axios.put(`/role_manage/update/${params.id}`, updateUserDetails)
      .then((response) => {
          console.log(response.data);
      })
