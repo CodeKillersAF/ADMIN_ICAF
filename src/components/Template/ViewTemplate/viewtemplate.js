@@ -14,7 +14,7 @@ function viewtemplate() {
     //get all templates
     const getAllTemplates = async () => {
         try{
-          const data = await axios.get('/templateAllBack')
+          const data = await axios.get('/template/templateAllBack')
          // console.log(data);
           setState(data.data.data);
         }
@@ -31,7 +31,7 @@ useEffect(() => {
   //render to update page
 const UpdateTemplate = (id) => {
     // console.log(id);
-    let path = `/update-template/${id}`
+    let path = `/template/update-template/${id}`
     history.push(path);
 }
 
