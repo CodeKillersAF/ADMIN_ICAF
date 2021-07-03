@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import GetAppIcon from '@material-ui/icons/GetApp';
 import DoneIcon from '@material-ui/icons/Done';
 import "./functionsOfAttendees.css";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function Attendee() {
+
+  const history = useHistory()
   
   let number =  0;
   
@@ -35,18 +38,22 @@ export default function Attendee() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/attendee/get-attendees-not-approved")
+      .get("/get-attendees-not-approved")
       .then((response) => {
         console.log(response.data.data);
         setAttendees(response.data.data);
+        console.log(response);
       })
       .catch((error) => {
-        console.log({ error: error.message });
+        alert(error.response.data.error);
+        let path = '/home';
+        history.push(path);
+        console.log({ error: error.response.data.error });
       });
     }, [trigger]);
 
   const handleApproval = (id) => {
-    axios.put(`http://localhost:8000/api/attendee/set-approval/${id}`)
+    axios.put(`/set-approval/${id}`)
     .then(response => {
       if(response.data.data){
         number = number + 1;
@@ -55,7 +62,10 @@ export default function Attendee() {
       }
     })
     .catch(error => {
-      console.log({error: error.message})
+      alert(error.response.data.error);
+        let path = '/home';
+        history.push(path);
+        console.log({ error: error.response.data.error });
     })
   }
 

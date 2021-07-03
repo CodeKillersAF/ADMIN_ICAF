@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
@@ -14,6 +14,8 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ListItemSub from "../ItemLists/ListItemSub";
 import { MainListItems } from "../ItemLists/MainListItems";
 import Account from "../Account/Account";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 
 const drawerWidth = 240;
@@ -85,8 +87,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Layout({ children }) {
- 
 
+  const history = useHistory();
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -96,7 +98,6 @@ export default function Layout({ children }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
 
   return (
     <div className={classes.root}>
@@ -116,6 +117,7 @@ export default function Layout({ children }) {
               open && classes.menuButtonHidden
             )}
           >
+
             <MenuIcon />
           </IconButton>
           <Typography
@@ -153,6 +155,7 @@ export default function Layout({ children }) {
         <div className={classes.appBarSpacer} />
         {children}
       </main>
+
     </div>
   );
 }

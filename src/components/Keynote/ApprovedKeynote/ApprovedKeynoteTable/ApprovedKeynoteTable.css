@@ -1,0 +1,39 @@
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 80%;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #DF175E;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.styled-table tbody tr {
+    border-bottom: 4px solid #dddddd;
+    font-weight: bold;
+}
+
+.approvedKeynoteHeader{
+    color:#3571f1 ;
+    font-weight: 600;
+    font-size: xx-large;
+}
+.approvedSearch{
+    margin-top:20px !important ;
+    margin-bottom: 30;
+    width: 40%;
+    margin-left:300 ;
+    height: 40px;
+}
