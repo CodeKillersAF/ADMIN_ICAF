@@ -6,7 +6,4 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:8080/api/users';
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 
-axios.defaults.baseURL = 'http://localhost:8080/api/users';
-axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-
 render(<App/>,document.getElementById('app'));
