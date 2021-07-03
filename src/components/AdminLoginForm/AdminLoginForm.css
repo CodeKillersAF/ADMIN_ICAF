@@ -1,15 +1,19 @@
 .adminLoginForm__paper{
     width: 300px;
-    height: 340px;
+    height: 360px;
     margin: 100px auto; 
     
 }
-.header{
+.loginHeader{
     text-align: center;
     height: 50px;
+    padding-top: 20px !important;
+    color: #3571f1;
+    font-weight: bolder !important;
+    font-size: xx-large;
     
 }
-.textfield .MuiTextField-root {
+.AdminTextfield .MuiTextField-root {
     
     
     margin-top: 20px;
@@ -22,7 +26,7 @@
     margin-top: 15px;
     margin-left: 13px !important;
 }
-.button{
+.adminLoginButton{
     margin-top: 15px !important;
     width: 250px;
     margin-left: 25px !important;

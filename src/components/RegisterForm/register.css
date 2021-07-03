@@ -1,0 +1,33 @@
+.create {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .create label {
+    text-align: left;
+    display: block;
+    font-weight: bold;
+  }
+  .create h1 {
+    font-size: 30px;
+    color: #3571f1;
+    margin-bottom: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  .create input, .create textarea, .create select {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+  }
+  .create button {
+    background: #3557f1;
+    color: #fff;
+    border: 0;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
