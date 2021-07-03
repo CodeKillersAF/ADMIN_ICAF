@@ -18,7 +18,6 @@ export default function AdminLoginForm() {
 
   const history = useHistory();
 
-
   const onFormClick =async()=>{
 
     let user={
@@ -50,7 +49,7 @@ export default function AdminLoginForm() {
           <Divider />
           <Grid className="AdminTextfield">
             <TextField
-              size="medium"
+              size="small"
               id="outlined-basic"
               label="Username"
               variant="outlined"
@@ -59,12 +58,12 @@ export default function AdminLoginForm() {
               onChange={(e)=>setusername(e.target.value)}
             />
             <TextField
-              size="medium"
+              size="small"
               id="outlined-basic"
               label="Password"
               variant="outlined"
               name="password"
-              value={password}
+              type="password"
               onChange={(e)=>setpassword(e.target.value)}
             />
           </Grid>
