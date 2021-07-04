@@ -125,7 +125,7 @@ export default function Attendee() {
           <Grid item xs={12} md={8} lg={12}>
             <Paper className={fixedHeightPaper}>
               <center>
-                <h3>Attendees</h3>
+                <h2 style={{color:"#3F51B5",  fontSize:40}}>Attendees</h2>
               </center>
               <input
                 type="search"

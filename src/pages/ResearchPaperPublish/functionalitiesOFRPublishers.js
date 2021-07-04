@@ -112,7 +112,7 @@ export default function ResearchPaper() {
           <Grid item xs={12} md={8} lg={12}>
             <Paper className={fixedHeightPaper}>
               <center>
-                <h3>Research Paper publishers</h3>
+                <h2 style={{color:"#3F51B5",  fontSize:40}}>Research Paper publishers</h2>
               </center>
               <input
                 type="search"
