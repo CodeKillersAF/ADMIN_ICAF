@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import GetAppIcon from '@material-ui/icons/GetApp';
 import DoneIcon from '@material-ui/icons/Done';
+import DeleteIcon from '@material-ui/icons/Delete';
 import "./functionsOfAttendees.css";
 import { useHistory } from 'react-router-dom';
 
@@ -55,17 +56,42 @@ export default function Attendee() {
   const handleApproval = (id) => {
     axios.put(`/set-approval/${id}`)
     .then(response => {
-      if(response.data.data){
+      console.log('email');
+      axios.get(`/send-email-to-approved-attendee/${id}`)
+      .then(response => {
+        console.log(response.data.data);
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
         number = number + 1;
         setTrigger(number)
         console.log(response.data.data);
-      }
     })
     .catch(error => {
       alert(error.response.data.error);
         let path = '/home';
         history.push(path);
         console.log({ error: error.response.data.error });
+    })
+  }
+
+  const onDownload = (url) => {
+    console.log('download')
+    const link = document.createElement('a');
+    link.href = url;
+    link.click();
+  }
+
+  const onDeleteHandlle = (id) => {
+    axios.delete(`delete-attendee/${id}`)
+    .then(response => {
+      console.log(response.data.data);
+      number = number + 1;
+      setTrigger(number)
+    })
+    .catch(error => {
+      console.log(error.message);
     })
   }
 
@@ -78,6 +104,7 @@ export default function Attendee() {
           {/* Chart */}
           <Grid item xs={12} md={8} lg={12}>
             <Paper className={fixedHeightPaper}>
+              <center><h3>Attendees</h3></center>
               <table className="styled-table">
                 <thead>
                   <tr>
@@ -88,6 +115,7 @@ export default function Attendee() {
                     <th>Approval</th>
                     <th>Download Bank Slip</th>
                     <th>Give approval</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
 
@@ -100,13 +128,18 @@ export default function Attendee() {
                       <td>{attendee.phone}</td>
                       <td>{attendee.is_approved.toString()}</td>
                       <td>
-                        <Button variant="outlined" color="secondary" endIcon={<GetAppIcon />} >
+                        <Button variant="outlined" color="secondary" onClick={() => onDownload(attendee.bank_slip_url)} endIcon={<GetAppIcon />} >
                           Download
                         </Button>
                       </td>
                       <td>
                         <Button variant="outlined" color="primary" onClick={() => handleApproval(attendee._id)} endIcon={ <DoneIcon/> }>
                           Approve
+                        </Button>
+                      </td>
+                      <td>
+                        <Button variant="outlined" color="secondary" onClick={() => onDeleteHandlle(attendee._id)} endIcon={ <DeleteIcon/> }>
+                          Delete
                         </Button>
                       </td>
                     </tr>

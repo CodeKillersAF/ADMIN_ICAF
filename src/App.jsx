@@ -19,6 +19,8 @@ import Attendees from "./pages/Attendees/functionsOfAttendees";
 import AddTemplatepage from './pages/TemplatePage/AddTemplatePage/addTemplatepage';
 import ViewTemplatePage from './pages/TemplatePage/ViewTemplatePage/viewTemplatepage';
 import UpdateTemplatePage from './pages/TemplatePage/EditTemplatePage/editTemplatepage';
+import WorkshopConductor from "./pages/WorkShopConductors/functionalitiesOfWorkShopConductors";
+import ResearchPaper from "./pages/ResearchPaperPublish/functionalitiesOFRPublishers";
 
 
 export default function App() {
@@ -46,6 +48,8 @@ export default function App() {
               <Route path="/add-template" component={AddTemplatepage} />
               <Route path="/view-template" component={ViewTemplatePage} />
               <Route path="/update-template/:id" component={UpdateTemplatePage} />
+              <Route path ="/workshop-conductors" component={WorkshopConductor} />
+              <Route path ="/research-paper" component={ResearchPaper} />
            </Layout>
           </Switch>
         </section>
