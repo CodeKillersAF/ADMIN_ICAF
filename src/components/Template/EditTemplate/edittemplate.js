@@ -2,8 +2,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
 import { storage } from '../../../firebase';
+import { makeStyles } from '@material-ui/core/styles';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+}))
 
 function edittemplate() {
+
+  const [open, setOpen] = React.useState(false);
+  const classes = useStyles();
 
     const history = useHistory();
     const params = useParams();
@@ -28,6 +41,7 @@ useEffect(() => {
 
 async function uploadfile(e) {
     e.preventDefault();
+    setOpen(true);
     let bucketName = "templateFiles";
     let uploadTask = storage.ref(`${bucketName}/${file.name}`).put(file);
     await uploadTask.on(
@@ -45,6 +59,7 @@ async function uploadfile(e) {
                 setUrl(firebaseURl);
                 console.log(firebaseURl);
                 setfileUploaded(true);
+                setOpen(false);
              });
         }
     );
@@ -64,7 +79,8 @@ async function uploadfile(e) {
           .put(`/template/update/${params.id}`, template)
           .then((response) => {
             console.log("Template updated");
-            history.go(-1);
+            let path = '/view-template';
+            history.push(path);
           });
     }
     else
@@ -80,31 +96,44 @@ function onFileSelect(e) {
 
     return (
         <div>
-            <div className="create">
-        <h1>Add Template</h1>
+      <center>
+      <Backdrop className={classes.backdrop} open={open}>
+        <CircularProgress color="inherit" />
+        {" "}Uploading....
+      </Backdrop>
+
+      <div className="regpage">
+        <div className="reg-title">Update Template</div>
+        <hr />
+        <br />
         <form>
-          <label>Template Topic</label>
+        <div class="inputs">
           <input type="text" required
+            className="reg-input"
              value={topic}
              onChange={(e) => setTopic(e.target.value)}
+             placeholder="New Topic"
           />
+          </div>
           <br />
 
-          <label>Template Description</label>
-          <input type="text" required 
+          <textarea type="text" required 
+              className="reg-input"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              placeholder="New Description"
           />
           <br />
           <input type="file" className="uploadButton"
             onChange={onFileSelect} 
             />
-          <button onClick={uploadfile}>upload Template</button>
+          <button onClick={uploadfile} className="upload-button">upload Template</button>
           <br /><br />
 
-          <button onClick={updateTemplate}>Update Template</button>
+          <button onClick={updateTemplate} className="reg-button">Update Template</button>
         </form>
       </div>
+      </center>
         </div>
     )
 }

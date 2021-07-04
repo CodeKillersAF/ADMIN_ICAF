@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import "./register.css";
 import axios from "axios";
+import { useHistory } from 'react-router-dom';
 
 function registerform() {
+
+  const history = useHistory();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
@@ -24,8 +28,18 @@ function registerform() {
 
     await axios.post('/register-user', user)
     .then((response) => {
-        console.log(response.data);
+        console.log(user.email);
         alert(response.data.message);
+        let path = '/view-user';
+        history.push(path);
+
+        axios.post('/role_manage/send-email', user)
+         .then((response) => {
+           alert('Email Send Successfully');
+         })
+         .catch((error) => {
+           console.log(error);
+         })
     })
     .catch((error) => {
         console.log(error.response.data);
@@ -35,51 +49,63 @@ function registerform() {
 
   return (
     <div>
-      <div className="create">
-        <h1>Add New User</h1>
+      <center>
+      <div className="regpage">
+        <div className="reg-title">Add New User</div>
+        <hr />
         <form onSubmit={onRegisterClick}>
-          <label>Your Name</label>
-          <input type="text" required
+        <div class="inputs">
+          {/* <label className="reg-label">Your Name</label> */}
+          <input className="reg-input" type="text" required
+              placeholder="Character Name"
              value={name}
              onChange={(e) => setName(e.target.value)}
           />
-          <br />
-
-          <label>Your Email</label>
-          <input type="email" required 
+        </div>
+          
+          {/* <label className="reg-label">Your Email</label> */}
+          <input className="reg-input"
+           type="email" required 
+           placeholder="Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
           />
-          <br />
 
-          <label>Select Role</label>
+          {/* <label>Select Role</label> */}
           <select 
             required
+            className="reg-input"
+            placeholder="Select Role"
             value={role}
             onChange={(e) => setRole(e.target.value)}
           >
+            <option value="Select a Role">Select a Role</option>
             <option value="editor">Editor</option>
             <option value="reviewer">Reviewer</option>
           </select>
-          <br />
-
-          <label>Username</label>
-          <input type="text" required 
+ 
+          {/* <label className="reg-label">Username</label> */}
+          <input 
+          className="reg-input"
+          type="text" required 
+              placeholder="User-Name"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
           />
-          <br />
 
-          <label>Password</label>
-          <input type="password" required 
+          {/* <label className="reg-label">Password</label> */}
+          <input 
+           className="reg-input"
+          type="password" required 
+             placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
           />
-          <br />
 
-          <button>Register</button>
+          <button className="reg-button">Register</button>
         </form>
-      </div>
+        </div>
+        </center>
     </div>
   );
 }

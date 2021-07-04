@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../../RegisterForm/register.css";
+import { useHistory } from 'react-router-dom';
 
 function admineditdata() {
+
+  const history = useHistory();
+
   const params = useParams();
     console.log(params.id);
 
@@ -38,6 +42,8 @@ function admineditdata() {
     const updateData = await axios.put(`/role_manage/update/${params.id}`, updateUserDetails)
      .then((response) => {
          console.log(response.data);
+         let path = '/view-user';
+         history.push(path);
      })
      .catch((error) => {
          console.log(error.message);
@@ -47,39 +53,49 @@ function admineditdata() {
 
   return (
     <div>
-      <div className="create">
-        <h1>Update User Details</h1>
+      <center>
+      <div className="regpage">
+      <div className="reg-title">Update User Details</div>
+        <hr />
+        <br />
         <form>
-          <label>Enter New Name</label>
+        <div class="inputs">
           <input
             type="text"
             required
+            className="reg-input"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            placeholder="New Name"
           />
-          <br />
-
-          <label>Enter New Email</label>
+      </div>
+      <br />
+  
           <input
             type="email"
             required
+            className="reg-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="New Email"
           />
-          <br />
 
-          <label>Enter New Username</label>
+<br />
+
           <input
             type="text"
             required
+            className="reg-input"
             value={userName}
             onChange={(e) => setuserName(e.target.value)}
+            placeholder="New Username"
           />
-          <br />
 
-          <button onClick={UpdateDetails}>update Details</button>
+<br />
+          <button onClick={UpdateDetails} className="reg-button">update Details</button>
         </form>
       </div>
+      </center>
     </div>
   );
 }

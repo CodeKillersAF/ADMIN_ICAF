@@ -4,6 +4,7 @@ import { storage } from '../../../firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
 function addTemplate() {
 
+    const history = useHistory();
     const [open, setOpen] = React.useState(false);
     const classes = useStyles();
 
@@ -36,6 +38,8 @@ function addTemplate() {
              .then((response) => {
                 console.log(response.data);
                 setfileUploaded(false);
+                let path = '/view-template';
+                history.push(path);
              })
              .catch((error) => {
                  console.log(error);
@@ -78,37 +82,47 @@ function addTemplate() {
 
     return (
         <div>
-
+        <center>
     <Backdrop className={classes.backdrop} open={open}>
         <CircularProgress color="inherit" />
         {" "}Uploading....
       </Backdrop>
-
-        <div className="create">
-        <h1>Add Template</h1>
+      
+        <div className="regpage">
+        <div className="reg-title">Add Template</div>
+        <hr />
+        <br />
         <form>
-          <label>Template Topic</label>
-          <input type="text" required
+        <div class="inputs">
+          <input
+           className="reg-input"
+           type="text" required
              value={topic}
              onChange={(e) => setTopic(e.target.value)}
+             placeholder="Template Topic"
+          />
+          </div>
+          <br />
+
+        <textarea
+          type="text" required 
+             className="reg-input"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Template Description"
           />
           <br />
 
-          <label>Template Description</label>
-          <input type="text" required 
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-          />
-          <br />
           <input type="file" className="uploadButton"
             onChange={onFileSelect} 
             />
-          <button onClick={uploadfile}>upload Template</button>
+          <button onClick={uploadfile} className="upload-button">upload Template</button>
           <br /><br />
 
-          <button onClick={addTemplate}>Add Template</button>
+          <button onClick={addTemplate} className="reg-button">Add Template</button>
         </form>
       </div>
+      </center>
         </div>
     )
 }

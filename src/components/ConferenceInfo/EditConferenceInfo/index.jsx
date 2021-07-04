@@ -91,6 +91,7 @@ export default class EditConferenceInfo extends React.Component {
                                                 name="venue"
                                                 value={this.state.venue}
                                                 onChange={this.onChange}
+                                                required
                                             />
                                         </div>
 
@@ -103,6 +104,7 @@ export default class EditConferenceInfo extends React.Component {
                                                 name="venue_dates"
                                                 value={this.state.venue_dates}
                                                 onChange={this.onChange}
+                                                required
                                             />
                                         </div>
 
@@ -115,6 +117,7 @@ export default class EditConferenceInfo extends React.Component {
                                                 name="venue_time"
                                                 value={this.state.venue_time}
                                                 onChange={this.onChange}
+                                                required
                                             />
                                         </div>
 
@@ -127,6 +130,7 @@ export default class EditConferenceInfo extends React.Component {
                                                 name="registrationopen_date"
                                                 value={this.state.registrationopen_date}
                                                 onChange={this.onChange}
+                                                required
                                             />
                                         </div>
 
@@ -139,6 +143,7 @@ export default class EditConferenceInfo extends React.Component {
                                                 name="lastregistration_date"
                                                 value={this.state.lastregistration_date}
                                                 onChange={this.onChange}
+                                                required
                                             />
                                         </div>
 
