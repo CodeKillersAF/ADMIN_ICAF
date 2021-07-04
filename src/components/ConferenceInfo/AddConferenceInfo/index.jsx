@@ -33,7 +33,7 @@ export default class AddConferenceInfo extends React.Component {
             lastregistration_date: this.state.lastregistration_date
         };
         console.log('Data to send', conferenceinfo)
-        axios.post('/', conferenceinfo)
+        axios.post('/conference', conferenceinfo)
             .then(response => {
                 alert('Conference details added successfully')
             })

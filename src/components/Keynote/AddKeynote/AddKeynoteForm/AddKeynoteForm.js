@@ -4,13 +4,13 @@ import { Paper, TextField } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import { Button } from "@material-ui/core";
-import axios from "../../../../axios";
 import { storage } from "../../../../firebase";
 import { TextareaAutosize } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -28,7 +28,7 @@ export default function KeynoteForm() {
   const [file, setfile] = useState(null);
   const [speakerImageUrl, setspeakerImageUrl] = useState("");
   const [imageUploaded, setimageUploaded] = useState(false);
-
+  const [emailopen, setemailopen] = useState(false);
   const [open, setOpen] = React.useState(false);
 
   async function addKeynote(e) {
@@ -40,14 +40,19 @@ export default function KeynoteForm() {
         position: position,
         speakerImageUrl: speakerImageUrl,
       };
+      console.log(keynote);
 
       await axios
-        .post("/keynotes/add-keynote", keynote)
+        .post("/keynote/add-keynote", keynote)
         .then((response) => {
           console.log(response.data);
           setimageUploaded(false);
-          const path = `/pending-keynote`;
-          history.push(path);
+          setemailopen(!emailopen);
+          axios.post("/keynote/send-mail").then((reponse) => {
+            setemailopen(false);
+            const path = `/pending-keynote`;
+            history.push(path);
+          });
         })
         .catch((error) => {
           console.log(error);
@@ -58,7 +63,6 @@ export default function KeynoteForm() {
   }
 
   function onImageSelect(e) {
-    console.log("dknjdnjd");
     setfile(e.target.files[0]);
   }
 
@@ -81,7 +85,6 @@ export default function KeynoteForm() {
           .getDownloadURL()
           .then((firebaseURl) => {
             setspeakerImageUrl(firebaseURl);
-            console.log(firebaseURl);
             setimageUploaded(true);
             setOpen(false);
           });
@@ -94,11 +97,14 @@ export default function KeynoteForm() {
       <Backdrop className={classes.backdrop} open={open}>
         <CircularProgress color="inherit" /> Uploading....
       </Backdrop>
+      <Backdrop className={classes.backdrop} open={emailopen}>
+        <CircularProgress color="inherit" /> Email sending....
+      </Backdrop>
       <form onSubmit={addKeynote}>
-        <Paper elevation={10} className="addKeynoteForm__paper">
-          <h1 className="addKeynoteHeader">Create Keynote</h1>
+        <Paper elevation={10} className="addnewKeynoteForm__paper">
+          <h1 className="addnewKeynoteHeader">Create Keynote</h1>
           <Divider />
-          <Grid className="addKeynotetextfield">
+          <Grid className="addnewKeynotetextfield">
             <TextField
               size="medium"
               id="outlined-basic"
@@ -133,7 +139,7 @@ export default function KeynoteForm() {
           </Grid>
           <input
             type="file"
-            className="uploadButton"
+            className="addnewKeynoteuploadButton"
             onChange={onImageSelect}
           />
           <Button variant="contained" color="primary" onClick={uploadFile}>
@@ -142,7 +148,7 @@ export default function KeynoteForm() {
           <Button
             variant="contained"
             color="secondary"
-            className="button"
+            className="addnewkeynotebutton"
             type="submit"
           >
             Create

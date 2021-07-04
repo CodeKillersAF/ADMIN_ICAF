@@ -11,7 +11,7 @@ function adminedituser() {
 
   const getRole = async () => {
     const data = await axios.get(
-      `/finduser/${params.id}`
+      `/role_manage/finduser/${params.id}`
     );
     //console.log(data.data.data);
     setUserName(data.data.data.username);
@@ -29,7 +29,7 @@ function adminedituser() {
         username: userName,
         role: roleCheck
     }
-    const updateData = await axios.put(`/update/role/${params.id}`, updateUser)
+    const updateData = await axios.put(`/role_manage/update/role/${params.id}`, updateUser)
      .then((response) => {
          console.log(response.data);
      })
