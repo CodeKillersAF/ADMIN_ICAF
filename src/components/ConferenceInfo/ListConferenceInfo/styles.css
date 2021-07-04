@@ -1,7 +1,11 @@
-.container {
+.approveView {
     border-radius: 5px;
     background-color: #f2f2f2;
-    padding: 20px;
+    padding: 40px;
+    border-bottom: 4px solid #a7a4a4;
+    /* border-top: 4px solid #a7a4a4;
+    border-left: 4px solid #a7a4a4;
+    border-right: 4px solid #a7a4a4; */
   }
 
   .textStyle{
@@ -65,4 +69,31 @@
       margin-top: 0;
     }
   }
+
+  .button1 {
+    background-color: #07b584;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+    .button1:hover {
+    background-color:#03553e;
+    }
+    .button2 {
+    background-color: #e2076f;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+    .button2:hover {
+    background-color: #aa0554;
+    }
   

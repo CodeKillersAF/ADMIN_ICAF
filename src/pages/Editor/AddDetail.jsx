@@ -42,7 +42,7 @@ export default function AddConferenceDetail() {
                     <Grid item xs={12} md={4} lg={3}>
                         <Paper className={fixedHeightPaper}>
                             <h4>Go to</h4>
-                            <Link to="/editor">
+                            <Link to="/editor" style={{ textDecoration: "none" }}>
                                 <Button variant="contained" color="secondary">
                                     View
                                 </Button>

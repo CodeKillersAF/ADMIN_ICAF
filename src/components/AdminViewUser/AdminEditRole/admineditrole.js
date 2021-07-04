@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../../RegisterForm/register.css";
+import { useHistory } from 'react-router-dom';
 
 function adminedituser() {
+
+  const history = useHistory();
+
   const params = useParams();
   //console.log(params.id);
   const [userName, setUserName] = useState('');
@@ -32,6 +36,8 @@ function adminedituser() {
     const updateData = await axios.put(`/role_manage/update/role/${params.id}`, updateUser)
      .then((response) => {
          console.log(response.data);
+        let path = '/view-user';
+        history.push(path);
      })
      .catch((error) => {
          console.log(error.message);
@@ -41,18 +47,21 @@ function adminedituser() {
 
   return (
     <div>
-      <div className="create">
-        <h1>Update User Role</h1>
+      <center>
+      <div className="regpage">
+      <div className="reg-title">Update User Role</div>
+      <hr />
+      <br />
         <form>
-          <label>Username</label>
-          <input type="text" required 
+          <div class="inputs">
+          <input className="reg-input" type="text" required 
            value={userName}
             disabled
           />
-          <br />
-
-          <label>Select New Role</label>
+          </div>
+<br />
           <select 
+            className="reg-input"
             required
             value={roleCheck}
             onChange={(e) => setRolecheck(e.target.value)}
@@ -61,9 +70,10 @@ function adminedituser() {
             <option value="editor">Editor</option>
             <option value="reviewer">Reviewer</option>
           </select> <br /><br />
-          <button onClick={UpdateRole}>update Role</button>
+          <button onClick={UpdateRole} className="reg-button">update Role</button>
         </form>
       </div>
+      </center>
     </div>
   );
 }

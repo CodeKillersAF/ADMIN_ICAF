@@ -9,10 +9,33 @@ import {useHistory } from 'react-router-dom';
 import BuildIcon from '@material-ui/icons/Build';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 
 export default function AdminViewUser() {
+
+  const [open, setOpen] = React.useState(false);
   const [state, setState] = useState([]);
+
+  const [reload, setReload] = useState(false);
+
+  const [userid, setUserId] = useState('');
+  const [role, setRole] = useState('');
+
+   //delete handle functions
+   const handleClickOpen = (e,userId, role) => {
+    setUserId(userId);
+    setRole(role);
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  }
 
   //search state
   const [searchTerm, setSearchTerm] = useState('');
@@ -75,16 +98,18 @@ export default function AdminViewUser() {
 
 
   //delete data
-  const handleDelete = (id, role) => {
+  const handleDelete = () => {
     //console.log(id);
     //console.log(role);
+    setOpen(false);
 
-    axios.delete(`/role_manage/delete/${id}`)
+    axios.delete(`/role_manage/delete/${userid}`)
      .then((response) => {
-       //console.log(response.data);
+       console.log(response.data);
        alert(response.data.data);
+       setReload(!reload);
         if(role == "reviewer"){
-          getDataReviewer()
+          getDataReviewer();
         }
         else if(role == "editor"){
           getDataEditor();
@@ -119,6 +144,32 @@ useEffect(() => {
 
   return (
     <div>
+
+<Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This will delete user permanent
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} color="primary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
     <br /><br />
     <center>
       <ButtonGroup size="large" variant="contained" color="primary" aria-label="contained primary button group">
@@ -164,7 +215,7 @@ useEffect(() => {
             <td>{user.role}</td>
             <td>{user.username}</td>
             <td>
-               <IconButton onClick={() => handleDelete(user._id, user.role)}> <DeleteIcon color="secondary"/> </IconButton> 
+               <IconButton onClick={(e) => handleClickOpen(e, user._id, user.role)}> <DeleteIcon color="secondary"/> </IconButton> 
             </td>
             <td>
                <IconButton onClick={() => UpdateRole(user._id)}> <EditIcon color="primary" /> </IconButton> 

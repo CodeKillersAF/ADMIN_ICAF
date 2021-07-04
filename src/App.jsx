@@ -21,6 +21,7 @@ import ViewTemplatePage from './pages/TemplatePage/ViewTemplatePage/viewTemplate
 import UpdateTemplatePage from './pages/TemplatePage/EditTemplatePage/editTemplatepage';
 import WorkshopConductor from "./pages/WorkShopConductors/functionalitiesOfWorkShopConductors";
 import ResearchPaper from "./pages/ResearchPaperPublish/functionalitiesOFRPublishers";
+import Inquiries from "./pages/Inquiries/inquiries";
 
 
 export default function App() {
@@ -50,6 +51,7 @@ export default function App() {
               <Route path="/update-template/:id" component={UpdateTemplatePage} />
               <Route path ="/workshop-conductors" component={WorkshopConductor} />
               <Route path ="/research-paper" component={ResearchPaper} />
+              <Route path ="/inquiries" component={Inquiries} />
            </Layout>
           </Switch>
         </section>
