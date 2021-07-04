@@ -20,7 +20,8 @@ export default function PendingKeynoteTable() {
   const [open, setOpen] = React.useState(false);
   const [approve, setapprove] = React.useState(false);
   const [keynoteid, setkeynoteid] = useState('');
-
+  const [fetchondelete, setfetchondelete] = useState(false);
+  const [fetchonapprove, setfetchonapprove] = useState(false)
   const [keynotes, setkeynotes] = useState([]);
 
   const handleClickOpen = (e,keynoteID) => {
@@ -42,7 +43,9 @@ export default function PendingKeynoteTable() {
 
   async function onClickDelete() {
     setOpen(false);
-    await axios.delete("/keynote/delete-keynote/" + keynoteid);
+    await axios.delete("/keynote/delete-keynote/" + keynoteid).then((response)=>{
+      setfetchondelete(!fetchondelete);
+    })
   }
 
   async function fetchData() {
@@ -54,7 +57,10 @@ export default function PendingKeynoteTable() {
     let approve = {
       is_approved: true,
     };
-    await axios.put("/keynote/approve-keynote/" + keynoteid, approve);
+    await axios.put("/keynote/approve-keynote/" + keynoteid, approve)
+    .then((reponse)=>{
+      setfetchonapprove(!fetchonapprove)
+    })
   }
 
   async function onClickNavigate(e, keynoteID) {
@@ -64,7 +70,7 @@ export default function PendingKeynoteTable() {
 
   useEffect(() => {
     fetchData();
-  });
+  },[fetchonapprove,fetchondelete]);
 
   return (
     <div>
