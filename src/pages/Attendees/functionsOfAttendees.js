@@ -11,6 +11,11 @@ import DoneIcon from '@material-ui/icons/Done';
 import DeleteIcon from '@material-ui/icons/Delete';
 import "./functionsOfAttendees.css";
 import { useHistory } from 'react-router-dom';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -34,7 +39,19 @@ export default function Attendee() {
   let number =  0;
   
   const [attendees, setAttendees] = useState([]);
-  const [trigger, setTrigger] = useState(0)
+  const [trigger, setTrigger] = useState(0);
+  const [open, setOpen] = React.useState(false);
+  const [attendeeId, setAttendeeId] = useState("");
+
+  const handleClickOpen = (e, id) => {
+    setAttendeeId(id);
+
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 
   useEffect(() => {
@@ -83,8 +100,9 @@ export default function Attendee() {
     link.click();
   }
 
-  const onDeleteHandlle = (id) => {
-    axios.delete(`delete-attendee/${id}`)
+  const onDeleteHandlle = () => {
+    setOpen(false)
+    axios.delete(`delete-attendee/${attendeeId}`)
     .then(response => {
       console.log(response.data.data);
       number = number + 1;
@@ -138,7 +156,7 @@ export default function Attendee() {
                         </Button>
                       </td>
                       <td>
-                        <Button variant="outlined" color="secondary" onClick={() => onDeleteHandlle(attendee._id)} endIcon={ <DeleteIcon/> }>
+                        <Button variant="outlined" color="secondary" onClick={(e) => handleClickOpen(e, attendee._id)} endIcon={ <DeleteIcon/> }>
                           Delete
                         </Button>
                       </td>
@@ -150,6 +168,30 @@ export default function Attendee() {
           </Grid>
         </Grid>
       </Container>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This will delete Attendee permanent
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+
+          <Button onClick={onDeleteHandlle} color="primary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
