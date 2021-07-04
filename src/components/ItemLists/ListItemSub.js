@@ -100,6 +100,12 @@ export default function ListItem() {
       </ListItem>
       <Collapse in={participantopen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
+        <ListItem button component={Link} to ="/inquiries">
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="Inquiries" />
+          </ListItem>
           <ListItem button component={Link} to ="/workshop-conductors">
             <ListItemIcon>
               <StarBorder />

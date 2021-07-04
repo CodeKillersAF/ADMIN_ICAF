@@ -126,7 +126,7 @@ export default function ResearchPaper() {
                       </td>
                       <td>
                         <Button variant="outlined" color="secondary" onClick={() => onDeleteHandlle(publisher._id)} endIcon={ <DeleteIcon/> }>
-                          Approve
+                          Delete
                         </Button>
                       </td>
                     </tr>

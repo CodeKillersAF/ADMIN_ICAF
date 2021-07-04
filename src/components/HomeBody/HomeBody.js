@@ -22,7 +22,11 @@ const useStyles = makeStyles((theme) => ({
     },
     fixedHeight: {
       height: 270,
+      
     },
+    fixedWidht: {
+      width: 500,
+    }
   }));
 export default function HomeBody() {
   
@@ -44,7 +48,7 @@ export default function HomeBody() {
   const [keynotecount, setkeynotecount] = useState(0)
   const [templatecount, settemplatecount] = useState(0)
     const classes = useStyles();
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight, classes.fixedWidht );
     return (
         <div>
            
