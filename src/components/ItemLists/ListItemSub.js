@@ -19,6 +19,7 @@ export default function ListItem() {
     const [open, setOpen] = React.useState(false);
     const [keynoteopen, setkeynoteopen] = React.useState(false);
     const [participantopen, setparticipantopen] = React.useState(false)
+    const [editoropen, seteditoropen] = React.useState(false)
     
   const handleClick = () => {
     setOpen(!open);
@@ -31,6 +32,10 @@ export default function ListItem() {
   const participantsHandleClick=()=>{
     setparticipantopen(!participantopen);
   }
+  const editorHandleClick=()=>{
+    seteditoropen(!editoropen);
+  }
+
   return (
     <div>
       <ListSubheader inset>Manage</ListSubheader>
@@ -95,23 +100,52 @@ export default function ListItem() {
       </ListItem>
       <Collapse in={participantopen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button component={Link} to ="/add-keynote">
+          <ListItem button component={Link} to ="/workshop-conductors">
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
             <ListItemText primary="Workshop Conductor" />
           </ListItem>
-          <ListItem button component={Link} to ="/pending-keynote">
+          <ListItem button component={Link} to ="/attendees">
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
             <ListItemText primary="Attendees" />
           </ListItem>
-          <ListItem button component={Link} to ="/approved-keynote">
+          <ListItem button component={Link} to ="/research-paper">
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
             <ListItemText primary="Research Publishers" />
+          </ListItem>
+        </List>
+      </Collapse>
+      <ListItem button onClick={editorHandleClick}>
+        <ListItemIcon>
+          <PermIdentity/>
+        </ListItemIcon>
+        <ListItemText primary="Editor" />
+        {editoropen ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={editoropen} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button component={Link} to ="/editor">
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="View" />
+          </ListItem>
+          <ListItem button component={Link} to ="/editor-add">
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="Add" />
+          </ListItem>
+          <ListItem button component={Link} to ="/editor-admin">
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="Approve" />
           </ListItem>
         </List>
       </Collapse>

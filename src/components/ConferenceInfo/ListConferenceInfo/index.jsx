@@ -14,7 +14,7 @@ export default class ListConferenceInfo extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('/conference/')
+        axios.get('/conference')
             .then(response => {
                 this.setState({ approved_details: response.data.data });
             })
@@ -36,12 +36,24 @@ export default class ListConferenceInfo extends React.Component {
             })
     }
 
+    getApprove(e, id) {     
+        axios.post('/conference/send-email')
+            .then(response => {
+                alert('Email sent');
+            })
+            .catch(error => {
+                console.log(error.message);
+                alert(error.message)
+            })
+    }
+
 
     render() {
         return (
-            <div className="container">
-                <div className="container">
+            <div>
+                {/* <div className="container"> */}
                     {this.state.approved_details.length > 0 && this.state.approved_details.map((item, index) => (
+                        <div className="approveView">
                         <div key={index} className="textStyle">
                             <div onClick={e => this.navigateUpdatePage(e, item._id)}>
                                 <p>Venue : {item.venue}</p>
@@ -51,11 +63,12 @@ export default class ListConferenceInfo extends React.Component {
                                 <p>Regstration close : {item.lastregistration_date}</p>
                                 <p>Status : {item.is_approved.toString()}</p>
                             </div>
-                            <button type="submit" className="btn btn-danger" onClick={e => this.removeInfo(e, item._id)}>Remove</button>
+                            <button type="submit" className="button1" onClick={e => this.removeInfo(e, item._id)}>Remove</button>
+                            <button type="submit" className="button2" onClick={e => this.getApprove(e, item._id)}>Get Approve</button>
+                        </div>
                         </div>
                     ))}
                 </div>
-            </div>
         )
     }
 }

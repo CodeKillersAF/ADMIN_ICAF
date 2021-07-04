@@ -4,7 +4,7 @@ import { Paper, TextField } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import { Button } from "@material-ui/core";
-import axios from "../../../../axios";
+import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 import { storage } from "../../../../firebase";
 import { TextareaAutosize } from "@material-ui/core";
@@ -30,9 +30,10 @@ export default function UpdateKeynoteForm() {
   const [speakerImageUrl, setspeakerImageUrl] = useState("");
   const [imageUploaded, setimageUploaded] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const [emailopen, setemailopen] = useState(false)
 
   async function fetchData() {
-    await axios.get("/keynotes/get-keynotes/" + id).then((response) => {
+    await axios.get("/keynote/get-keynotes/" + id).then((response) => {
       setspeakerName(response.data.data.speakerName);
       setposition(response.data.data.position);
       setdescription(response.data.data.description);
@@ -61,8 +62,6 @@ export default function UpdateKeynoteForm() {
             console.log(firebaseURl);
             setimageUploaded(true);
             setOpen(false);
-            alert("Image uploaded");
-            
           });
       }
     );
@@ -82,12 +81,16 @@ export default function UpdateKeynoteForm() {
             is_approved: false,
             speakerImageUrl : speakerImageUrl
           };
-      
+          setemailopen(!emailopen);
           await axios
-            .put("/keynotes/update-keynote/" + id, keynote)
+            .put("/keynote/update-keynote/" + id, keynote)
             .then((response) => {
-              console.log("updated");
+              axios.post("/keynote/send-mail")
+              .then((response)=>{
+                setemailopen(false);
               history.go(-1);
+              })
+              
             });
       }
       else
@@ -107,6 +110,10 @@ export default function UpdateKeynoteForm() {
       <Backdrop className={classes.backdrop} open={open}>
         <CircularProgress color="inherit" />
        {" "} Uploading....
+      </Backdrop>
+      <Backdrop className={classes.backdrop} open={emailopen}>
+        <CircularProgress color="inherit" />
+       {" "} Email sending....
       </Backdrop>
       <form onSubmit={updateKeynote}>
       <Paper elevation={10} className="keynoteForm__paper">
@@ -135,21 +142,21 @@ export default function UpdateKeynoteForm() {
             rowsMax={4}
             aria-label="maximum height"
             placeholder="Description"
-            className="textarea"
+            className="uploadtextarea"
             name="description"
             value={description}
             onChange={(e) => setdescription(e.target.value)}
             required={true}
           />
         </Grid>
-        <input type="file" className="uploadButton" onChange={onImageSelect} />
+        <input type="file" className="updatekeynoteuploadButton" onChange={onImageSelect} />
         <Button variant="contained" color="primary" onClick={uploadFile}>
           Upload Image
         </Button>
         <Button
           variant="contained"
           color="secondary"
-          className="button"
+          className="updatekeynotebutton"
           type="submit"
         >
           update

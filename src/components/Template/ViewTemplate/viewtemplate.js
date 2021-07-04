@@ -4,6 +4,8 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { useHistory } from 'react-router-dom';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import Button from '@material-ui/core/Button';
 
 function viewtemplate() {
 
@@ -14,7 +16,7 @@ function viewtemplate() {
     //get all templates
     const getAllTemplates = async () => {
         try{
-          const data = await axios.get('/templateAllBack')
+          const data = await axios.get('/template/templateAllBack')
          // console.log(data);
           setState(data.data.data);
         }
@@ -50,6 +52,14 @@ const UpdateTemplate = (id) => {
      })
   };
 
+  //download url button set
+  const downloadUrl = (url) => {
+    console.log(url);
+    const link = document.createElement('a');
+    link.href = url;
+    link.click();
+  }
+
 
     return (
         <div>
@@ -59,7 +69,6 @@ const UpdateTemplate = (id) => {
     <thead>
         <tr>
             <th>Topic</th>
-            <th>Description</th>
             <th>Template</th>
             <th>Edit Template</th>
         </tr>
@@ -69,12 +78,13 @@ const UpdateTemplate = (id) => {
     <tbody>
         <tr key={template.topic}>
             <td>{template.topic}</td>
-            <td>{template.description}</td>
             <td>
-            <button className="btn btn-dark btn-md px-4 gap-3"><a href={template.url} 
-              style={{ color: "#fff", textDecoration: "none" }}>Download</a></button>
+            {/* <button className="btn btn-dark btn-md px-4 gap-3"><a href={template.url} 
+              style={{ color: "#fff", textDecoration: "none" }}>Download</a></button> */} 
+            <Button variant="outlined" color="secondary" onClick={() => {downloadUrl(template.url)}} endIcon={<GetAppIcon />}>
+               Download
+            </Button>
             </td>
-
             <td>
                <IconButton onClick={() => {deleteTemplate(template._id)}}> <DeleteIcon color="secondary"/> </IconButton> 
                <IconButton onClick={() => {UpdateTemplate(template._id)}}> <EditIcon color="primary" /> </IconButton> 
