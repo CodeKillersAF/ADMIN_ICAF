@@ -36,6 +36,7 @@ export default function ResearchPaper() {
   const [trigger, setTrigger] = useState(0);
   const [open, setOpen] = React.useState(false);
   const [publisherId, setPublisherId] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleClickOpen = (e, id) => {
     setPublisherId(id);
@@ -88,7 +89,7 @@ export default function ResearchPaper() {
   };
 
   const onDeleteHandlle = () => {
-    setOpen(false)
+    setOpen(false);
     axios
       .delete(`/delete-publiser/${publisherId}`)
       .then((response) => {
@@ -113,6 +114,14 @@ export default function ResearchPaper() {
               <center>
                 <h3>Research Paper publishers</h3>
               </center>
+              <input
+                type="search"
+                //class="input-search"
+                placeholder="Search Username"
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                }}
+              />
               <table className="styled-table">
                 <thead>
                   <tr>
@@ -127,49 +136,61 @@ export default function ResearchPaper() {
                   </tr>
                 </thead>
 
-                {publishers.map((publisher) => (
-                  <tbody>
-                    <tr key={publisher._id}>
-                      <td>{publisher.first_name}</td>
-                      <td>{publisher.last_name}</td>
-                      <td>{publisher.email}</td>
-                      <td>{publisher.phone}</td>
-                      <td>{publisher.is_approved.toString()}</td>
-                      <td>
-                        <Button
-                          variant="outlined"
-                          color="secondary"
-                          onClick={() =>
-                            onDownload(publisher.researchPaper_url)
-                          }
-                          endIcon={<GetAppIcon />}
-                        >
-                          Download
-                        </Button>
-                      </td>
-                      <td>
-                        <Button
-                          variant="outlined"
-                          color="primary"
-                          onClick={() => handleApproval(publisher._id)}
-                          endIcon={<DoneIcon />}
-                        >
-                          Approve
-                        </Button>
-                      </td>
-                      <td>
-                        <Button
-                          variant="outlined"
-                          color="secondary"
-                          onClick={(e) => handleClickOpen(e, publisher._id)}
-                          endIcon={<DeleteIcon />}
-                        >
-                          Delete
-                        </Button>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
+                {publishers
+                  .filter((val) => {
+                    if (searchTerm === "") {
+                      return val;
+                    } else if (
+                      val.first_name
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
+                    ) {
+                      return val;
+                    }
+                  })
+                  .map((publisher) => (
+                    <tbody>
+                      <tr key={publisher._id}>
+                        <td>{publisher.first_name}</td>
+                        <td>{publisher.last_name}</td>
+                        <td>{publisher.email}</td>
+                        <td>{publisher.phone}</td>
+                        <td>{publisher.is_approved.toString()}</td>
+                        <td>
+                          <Button
+                            variant="outlined"
+                            color="secondary"
+                            onClick={() =>
+                              onDownload(publisher.researchPaper_url)
+                            }
+                            endIcon={<GetAppIcon />}
+                          >
+                            Download
+                          </Button>
+                        </td>
+                        <td>
+                          <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={() => handleApproval(publisher._id)}
+                            endIcon={<DoneIcon />}
+                          >
+                            Approve
+                          </Button>
+                        </td>
+                        <td>
+                          <Button
+                            variant="outlined"
+                            color="secondary"
+                            onClick={(e) => handleClickOpen(e, publisher._id)}
+                            endIcon={<DeleteIcon />}
+                          >
+                            Delete
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  ))}
               </table>
             </Paper>
           </Grid>

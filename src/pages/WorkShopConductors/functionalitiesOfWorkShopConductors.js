@@ -37,6 +37,7 @@ export default function WorkshopConductor() {
   const [trigger, setTrigger] = useState(0);
   const [open, setOpen] = React.useState(false);
   const [workShopId, setWorkShopId] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleClickOpen = (e, id) => {
     setWorkShopId(id);
@@ -47,7 +48,6 @@ export default function WorkshopConductor() {
   const handleClose = () => {
     setOpen(false);
   };
-
 
   useEffect(() => {
     axios
@@ -90,7 +90,7 @@ export default function WorkshopConductor() {
   };
 
   const onDeleteHandle = () => {
-    setOpen(false)
+    setOpen(false);
     axios
       .delete(`/delete-work-shops/${workShopId}`)
       .then((response) => {
@@ -114,6 +114,14 @@ export default function WorkshopConductor() {
               <center>
                 <h3>Work Shop Conductors</h3>
               </center>
+              <input
+                type="search"
+                //class="input-search"
+                placeholder="Search Username"
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                }}
+              />
               <table className="styled-table">
                 <thead>
                   <tr>
@@ -128,47 +136,59 @@ export default function WorkshopConductor() {
                   </tr>
                 </thead>
 
-                {conductors.map((conductor) => (
-                  <tbody>
-                    <tr key={conductor._id}>
-                      <td>{conductor.first_name}</td>
-                      <td>{conductor.last_name}</td>
-                      <td>{conductor.email}</td>
-                      <td>{conductor.phone}</td>
-                      <td>{conductor.is_approved.toString()}</td>
-                      <td>
-                        <Button
-                          variant="outlined"
-                          color="secondary"
-                          endIcon={<GetAppIcon />}
-                          onClick={() => onDownload(conductor.praposal_url)}
-                        >
-                          Download
-                        </Button>
-                      </td>
-                      <td>
-                        <Button
-                          variant="outlined"
-                          color="primary"
-                          onClick={() => handleApproval(conductor._id)}
-                          endIcon={<DoneIcon />}
-                        >
-                          Approve
-                        </Button>
-                      </td>
-                      <td>
-                        <Button
-                          variant="outlined"
-                          color="secondary"
-                          onClick={(e) => handleClickOpen(e, conductor._id)}
-                          endIcon={<DeleteIcon />}
-                        >
-                          Delete
-                        </Button>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
+                {conductors
+                  .filter((val) => {
+                    if (searchTerm === "") {
+                      return val;
+                    } else if (
+                      val.first_name
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
+                    ) {
+                      return val;
+                    }
+                  })
+                  .map((conductor) => (
+                    <tbody>
+                      <tr key={conductor._id}>
+                        <td>{conductor.first_name}</td>
+                        <td>{conductor.last_name}</td>
+                        <td>{conductor.email}</td>
+                        <td>{conductor.phone}</td>
+                        <td>{conductor.is_approved.toString()}</td>
+                        <td>
+                          <Button
+                            variant="outlined"
+                            color="secondary"
+                            endIcon={<GetAppIcon />}
+                            onClick={() => onDownload(conductor.praposal_url)}
+                          >
+                            Download
+                          </Button>
+                        </td>
+                        <td>
+                          <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={() => handleApproval(conductor._id)}
+                            endIcon={<DoneIcon />}
+                          >
+                            Approve
+                          </Button>
+                        </td>
+                        <td>
+                          <Button
+                            variant="outlined"
+                            color="secondary"
+                            onClick={(e) => handleClickOpen(e, conductor._id)}
+                            endIcon={<DeleteIcon />}
+                          >
+                            Delete
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  ))}
               </table>
             </Paper>
           </Grid>
