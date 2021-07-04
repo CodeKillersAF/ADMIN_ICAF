@@ -19,6 +19,7 @@ export default function ApprovedKeynoteTable() {
   const [searchTerm, setSearchTerm] = useState('');
   const [keynotes, setkeynotes] = useState([]);
   const [keynoteid, setkeynoteid] = useState('');
+  const [fetchondelete, setfetchondelete] = useState(false)
 
   const handleClickOpen = (e,keynoteID) => {
     setkeynoteid(keynoteID);
@@ -28,21 +29,23 @@ export default function ApprovedKeynoteTable() {
   const handleClose = () => {
     setOpen(false);
   };
+  async function fetchData() {
+    const req = await axios("/keynote/get-approved-keynotes");
 
+    console.log(req.data.data);
+    setkeynotes(req.data.data);
+  }
   useEffect(() => {
-    async function fetchData() {
-      const req = await axios("/keynote/get-approved-keynotes");
-
-      console.log(req.data.data);
-      setkeynotes(req.data.data);
-    }
     fetchData();
-  },[onClickDelete]);
+    }
+    
+  ,[fetchondelete,fetchData]);
 
   async function onClickDelete() {
     setOpen(false);
     await axios.delete("/keynote/delete-keynote/" + keynoteid);
     setkeynoteid('');
+    setfetchondelete(!fetchondelete)
   }
 
   async function onClickNavigate(e, keynoteID) {

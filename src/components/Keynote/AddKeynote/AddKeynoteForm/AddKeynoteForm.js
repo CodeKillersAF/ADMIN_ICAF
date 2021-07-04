@@ -85,7 +85,6 @@ export default function KeynoteForm() {
           .getDownloadURL()
           .then((firebaseURl) => {
             setspeakerImageUrl(firebaseURl);
-            console.log(firebaseURl);
             setimageUploaded(true);
             setOpen(false);
           });
