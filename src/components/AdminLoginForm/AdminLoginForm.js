@@ -30,9 +30,8 @@ export default function AdminLoginForm() {
       console.log(response.data); 
       let path =`/home/`
       history.push(path);
-     localStorage.setItem('token', response.data.token)
-      console.log(response.data.token);
-      window.location.reload();
+      localStorage.setItem('token', response.data.token)
+      window.location.reload()
     })
     .catch((err)=>{
       console.log(err.response.data);

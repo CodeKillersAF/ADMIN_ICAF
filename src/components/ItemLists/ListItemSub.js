@@ -100,19 +100,19 @@ export default function ListItem() {
       </ListItem>
       <Collapse in={participantopen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button component={Link} to ="/add-keynote">
+          <ListItem button component={Link} to ="/workshop-conductors">
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
             <ListItemText primary="Workshop Conductor" />
           </ListItem>
-          <ListItem button component={Link} to ="/pending-keynote">
+          <ListItem button component={Link} to ="/attendees">
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
             <ListItemText primary="Attendees" />
           </ListItem>
-          <ListItem button component={Link} to ="/approved-keynote">
+          <ListItem button component={Link} to ="/research-paper">
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
