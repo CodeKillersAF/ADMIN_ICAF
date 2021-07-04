@@ -32,7 +32,7 @@ function addTemplate() {
                 url: url,
             }
 
-            await axios.post("/create-template", template)
+            await axios.post("/template/create-template", template)
              .then((response) => {
                 console.log(response.data);
                 setfileUploaded(false);

@@ -14,7 +14,7 @@ function viewtemplate() {
     //get all templates
     const getAllTemplates = async () => {
         try{
-          const data = await axios.get('/templateAllBack')
+          const data = await axios.get('/template/templateAllBack')
          // console.log(data);
           setState(data.data.data);
         }

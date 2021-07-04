@@ -15,7 +15,7 @@ function edittemplate() {
     const [fileuploaded, setfileUploaded] = useState(false);
 
     async function getSelectedData() {
-        await axios.get(`/findtemplate/${params.id}`)
+        await axios.get(`/template/findtemplate/${params.id}`)
          .then((response) => {
              setTopic(response.data.data.topic);
              setDescription(response.data.data.description);
