@@ -58,8 +58,11 @@ export default function PendingKeynoteTable() {
       is_approved: true,
     };
     await axios.put("/keynote/approve-keynote/" + keynoteid, approve)
-    .then((reponse)=>{
+    .then((response)=>{
+      alert("Approved");
       setfetchonapprove(!fetchonapprove)
+    }).catch(()=>{
+      alert("Unauthorized");
     })
   }
 
