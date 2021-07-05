@@ -1,0 +1,12 @@
+ *{
+    margin: 0;
+}
+
+.adminLoginPage{
+    
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-image: url(../../../public/images/loginbackground.jpg);
+    background-size: cover;
+}
