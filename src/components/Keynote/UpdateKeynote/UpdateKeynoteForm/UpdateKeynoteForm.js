@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function UpdateKeynoteForm() {
-  const hitstory = useHistory();
+  const history = useHistory();
   const classes = useStyles();
   const [speakerName, setspeakerName] = useState("");
   const [description, setdescription] = useState("");
@@ -88,7 +88,8 @@ export default function UpdateKeynoteForm() {
               axios.post("/keynote/send-mail")
               .then((response)=>{
                 setemailopen(false);
-              history.go(-1);
+                const path =`/pending-keynote`;
+              history.push(path);
               })
               
             });
