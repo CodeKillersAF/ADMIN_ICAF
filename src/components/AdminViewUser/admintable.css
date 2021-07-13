@@ -1,0 +1,56 @@
+.styled-table {
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 90%;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #DF175E;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 4px solid #dddddd;
+    font-weight: bold;
+}
+
+/* Style the search box inside the navigation bar */
+input[type=search] {
+    float: left;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+    margin-left: 56px;
+    width: 300px;
+    /* border: 1px solid rgb(241, 8, 8); */
+  }
+  
+  /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+  @media screen and (max-width: 600px) {
+     a, input[type=search] {
+      float: none;
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 0;
+      padding: 14px;
+    }
+    input[type=search] {
+      border: 1px solid rgb(241, 8, 8);
+    }
+  }
+

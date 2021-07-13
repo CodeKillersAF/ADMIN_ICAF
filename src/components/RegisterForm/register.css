@@ -1,0 +1,150 @@
+/* .create {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+  } 
+
+   .create label { 
+    text-align: left;
+    display: block;
+    font-weight: bold;
+  }
+  .create h1 {
+    font-size: 30px;
+    color: #3571f1;
+    margin-bottom: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  .create input, .create textarea, .create select {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+  }
+  .create button {
+    background: #3557f1;
+    color: #fff;
+    border: 0;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+  } */
+
+/* body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #ecf0f3;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  place-items: center;
+  overflow: hidden;
+  font-family: poppins;
+} */
+
+.regpage {
+  position: relative;
+  width: 500px;
+  height: 510px;
+  border-radius: 20px;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #f1f1f7;
+  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+}
+
+.reg-title {
+  margin-top: 0px;
+  font-weight: 900;
+  font-size: 40px;
+  color: #3F51B5;
+  letter-spacing: 1px;
+  font-family: LEMON MILK;
+}
+
+.inputs {
+  text-align: left;
+  margin-top: 30px;
+}
+
+.reg-input {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+.reg-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.reg-input::placeholder {
+  color: rgb(7, 1, 1);
+}
+
+.reg-input {
+  background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 50px;
+  font-size: 14px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+  margin-bottom: 15px;
+}
+
+.reg-button {
+  margin-top: 20px;
+  background: #3F51B5;
+  height: 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
+  color: #ecf0f3;
+  font-size: medium;
+}
+
+.reg-button:hover {
+  box-shadow: none;
+}
+
+.upload-button {
+  background: #3F51B5;
+  height: 40px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
+  color: #ecf0f3;
+  font-size: small;
+}
+
+/* a {
+  position: absolute;
+  font-size: 8px;
+  bottom: 4px;
+  right: 4px;
+  text-decoration: none;
+  color: black;
+  background: yellow;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+h1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
